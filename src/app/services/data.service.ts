@@ -1,0 +1,29 @@
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
+@Injectable()
+export class DataService {
+	constructor(private http:Http) {}
+	
+    private API_ROOT = 'http://localhost:53614/Home/';
+    
+    private getHeaders():any {
+        let headers = new Headers();  
+		headers.append('Content-Type', 'application/json');
+		headers.append('Access-Control-Allow-Origin', '*');
+		return {headers: headers};
+	}
+
+    getCptCodes(filter:string):any {
+		return this.http.get(`${this.API_ROOT}getCptCodes?filter=${filter}`)
+			.map((resp:any) => resp.json());
+	}
+    
+    getIcd10Codes(cptCode: string):any {
+		return this.http.get(`${this.API_ROOT}getIcd10Codes?cpt=${cptCode}`)
+			.map((resp:any) => resp.json());
+	}
+}

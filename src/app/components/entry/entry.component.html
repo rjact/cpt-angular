@@ -1,0 +1,36 @@
+<div class="container">
+	<div>
+		<h2>Patient Information</h2>
+		<dl>
+			<dt><label for="patientName">Patient Name</label></dt>
+			<dd><input type="text" [(ngModel)]="entry.Name" class="form-control" /></dd>
+			<dt><label for="dob">Date of Birth</label></dt>
+			<dd><input type="date" [(ngModel)]="entry.Dob"class="form-control" /></dd>
+			<dt><label for="procedureDate">Date of Procedure</label></dt>
+			<dd><input type="date" [(ngModel)]="entry.ProcedureDate" class="form-control" /></dd>
+			<dt><label for="ehr">EHR #</label></dt>
+			<dd><input type="text" [(ngModel)]="entry.Ehr" class="form-control" /></dd>
+		</dl>
+	</div>
+	<div>
+		<h2>CPT Codes</h2>
+		<label>CPT Codes</label>
+		<ul id="cptCodeList">
+			<li *ngFor="let cpt of entry.CptCodes">
+				<input type="text" class="form-control" [(ngModel)]="filter">
+				<button (click)="doFilter()">Find</button>
+				<select *ngIf="allCptCodes">
+					<option></option>
+					<option *ngFor="let cpt of allCptCodes" value=""></option>
+				</select>
+				<ul>
+					<li *ngFor="let icd10codes of cpt.ICD10Codes">
+						<select (change)="icd10Selected(cpt)">
+							<option value=""></option>
+							<option *ngFor="let icd10 of cpt.AllIcd10Codes" value="icd10.ICD10CMCode">{{icd10.ICD10CMFullDescription}}</option>
+						</select>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
