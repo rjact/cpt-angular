@@ -1,8 +1,8 @@
 export class Icd10Code {
 	public CPTCode: string;
-	public CCptCodeFullDescription:string;
-	public ICD10CMCode: string;
-	public ICD10CMFullDescription:string;
+	public CptCodeFullDescription:string;
+	public ICD_10CMCode: string;
+	public ICD_10CMFullDescription:string;
 
 	constructor() {}
 }

@@ -14,6 +14,7 @@ import { Icd10Code } from '../../models/Icd10Code';
 export class EntryComponent implements OnInit {
 	public entry: Entry;
 	public newCode:string;
+	private activeCpt:string = '';
 	constructor(private dataService: DataService){}
     
     ngOnInit():void {
@@ -29,7 +30,14 @@ export class EntryComponent implements OnInit {
 			});
 		}
 	}
+	getIcd10s(cpt) {
+		this.activeCpt = cpt;
+	}
+	addIcd10(icd10) {
+		const currCpt = this.entry.CptCodes.filter(c => c.CPTCode == this.activeCpt);
+		currCpt[0].ICD10Codes.push(icd10);
+	}
 	removeIcd10(cpt:CptCode, code:string) {
-		cpt.ICD10Codes = cpt.ICD10Codes.filter(i => i.ICD10CMCode != code);
+		cpt.ICD10Codes = cpt.ICD10Codes.filter(i => i.ICD_10CMCode != code);
 	}
 }

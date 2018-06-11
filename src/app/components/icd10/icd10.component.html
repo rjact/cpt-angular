@@ -1,0 +1,10 @@
+
+<div class="icd10List popup">
+	<ul>
+		<li *ngFor="let icd10 of icd10codes">
+			<span>{{icd10.ICD_10CMCode}}</span>
+			<span>{{icd10.ICD_10CMFullDescription}}</span>
+			<div class="btn" (click)="addIcd10(icd10)">Add</div>
+		</li>
+	</ul>
+</div>
