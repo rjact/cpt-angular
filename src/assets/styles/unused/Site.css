@@ -23,21 +23,21 @@ textarea {
     max-width: 280px;
 }
 
-.container {
-	display:flex;
-}
+	.container {
+		display:flex;
+	}
 
-.container > div {
-	padding:0 30px;
-	width:400px;
-}
-span.k-autocomplete {
-	width:100%;
-}
+	.container > div {
+		padding:0 30px;
+		width:400px;
+	}
+	span.k-autocomplete {
+		width:100%;
+	}
 
-ul {list-style-type:none;}
-li { margin-bottom:15px;}
+	ul {list-style-type:none;}
+	li { margin-bottom:15px;}
 
-input.k-input {
-	margin-right:10px;
-}
+	input.k-input {
+		margin-right:10px;
+	}

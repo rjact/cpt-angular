@@ -1,5 +1,5 @@
 <div class="container">
-	<div>
+	<div class="patientInfo">
 		<h2>Patient Information</h2>
 		<dl>
 			<dt><label for="patientName">Patient Name</label></dt>
@@ -12,25 +12,26 @@
 			<dd><input type="text" [(ngModel)]="entry.Ehr" class="form-control" /></dd>
 		</dl>
 	</div>
-	<div>
+	<div class="cptSection">
 		<h2>CPT Codes</h2>
-		<label>CPT Codes</label>
 		<ul id="cptCodeList">
 			<li *ngFor="let cpt of entry.CptCodes">
-				<input type="text" class="form-control" [(ngModel)]="filter">
-				<button (click)="doFilter()">Find</button>
-				<select *ngIf="allCptCodes">
-					<option></option>
-					<option *ngFor="let cpt of allCptCodes" value=""></option>
-				</select>
-				<ul>
-					<li *ngFor="let icd10codes of cpt.ICD10Codes">
-						<select (change)="icd10Selected(cpt)">
-							<option value=""></option>
-							<option *ngFor="let icd10 of cpt.AllIcd10Codes" value="icd10.ICD10CMCode">{{icd10.ICD10CMFullDescription}}</option>
-						</select>
+				<div class="cptInfo">
+					<div>{{cpt.CPTCode}}</div>
+					<div>{{cpt.FullDescriptor}}</div>
+					<div><button class="addIcd10" (click)="getIcd10s()">ICD-10 Codes</button></div>
+				</div>
+				<ul *ngIf="cpt.ICD10Codes.length > 0">
+					<li *ngFor="let icd10 of cpt.ICD10Codes">
+						<div class="icd10code">{{icd10.ICD10CMCode}}</div>
+						<div class="icd10desc">{{icd10.ICD10CMFullDescription}}</div>
+						<div><button (click)="removeIcd10(cpt, icd10.ICD10CMCode)">Remove</button></div>
 					</li>
 				</ul>
 			</li>
 		</ul>
+		<div>
+			<input type="text" class="form-control" [(ngModel)]="newCode">
+			<button (click)="add()">Add New</button>
+		</div>
 	</div>

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+}
+.container > div {
+  padding: 0 auto;
+  width: 400px;
+}
+.container ul li {
+  margin-bottom: 15px;
+}
+.container .patientInfo dl dt {
+  margin-bottom: 6px;
+}
+.container .patientInfo dl dd {
+  margin-bottom: 12px;
+}
+.container .patientInfo dl dd input {
+  padding: 4px;
+  width: 350px;
+}
+.container .cptSection input {
+  padding: 4px;
+}
+.container .cptSection .cptInfo {
+  display: flex;
+}

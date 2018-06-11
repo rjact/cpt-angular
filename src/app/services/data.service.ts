@@ -17,6 +17,10 @@ export class DataService {
 		return {headers: headers};
 	}
 
+	getCptCode(code:string) {
+		return this.http.get(`${this.API_ROOT}getCptCode?code=${code}`)
+			.map((resp:any) => resp.json());
+	}
     getCptCodes(filter:string):any {
 		return this.http.get(`${this.API_ROOT}getCptCodes?filter=${filter}`)
 			.map((resp:any) => resp.json());
