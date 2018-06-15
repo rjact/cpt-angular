@@ -1,0 +1,19 @@
+.icd10List {
+	li {
+		display: flex;
+		width:100%;
+		padding: 8px;
+
+		&:nth-child(2n) {
+			background-color:#f0f0f0;
+		}
+		span {
+			&.code {
+				width:125px;
+			}
+			&.description {
+				flex-grow: 1;
+			}
+		}
+	}
+}

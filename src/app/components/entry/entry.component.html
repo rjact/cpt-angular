@@ -17,15 +17,15 @@
 		<ul id="cptCodeList">
 			<li *ngFor="let cpt of entry.CptCodes">
 				<div class="cptInfo">
-					<div>{{cpt.CPTCode}}</div>
-					<div>{{cpt.FullDescriptor}}</div>
-					<div><button class="addIcd10" (click)="getIcd10s(cpt.CPTCode)">ICD-10 Codes</button></div>
+					<div class="code">{{cpt.CPTCode}}</div>
+					<div class="description">{{cpt.FullDescriptor}}</div>
+					<div class="btn addIcd10" (click)="getIcd10s(cpt.CPTCode)">ICD-10 Codes</div>
 				</div>
-				<ul *ngIf="cpt.ICD10Codes.length > 0">
+				<ul class="icd10s" *ngIf="cpt.ICD10Codes.length > 0">
 					<li *ngFor="let icd10 of cpt.ICD10Codes">
 						<div class="icd10code">{{icd10.ICD_10CMCode}}</div>
 						<div class="icd10desc">{{icd10.ICD_10CMFullDescription}}</div>
-						<div><button (click)="removeIcd10(cpt, icd10.ICD10CMCode)">Remove</button></div>
+						<div class="btn" (click)="removeIcd10(cpt, icd10.ICD_10CMCode)">Remove</div>
 					</li>
 				</ul>
 			</li>
@@ -36,4 +36,4 @@
 		</div>
 	</div>
 
-	<icd10codes [cpt]="activeCpt" *ngIf="activeCpt" (onAddIcd10)="addIcd10($event)"></icd10codes>
+	<icd10codes [cpt]="activeCpt" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>

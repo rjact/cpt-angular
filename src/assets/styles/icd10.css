@@ -1,0 +1,14 @@
+.icd10List li {
+  display: flex;
+  width: 100%;
+  padding: 8px;
+}
+.icd10List li:nth-child(2n) {
+  background-color: #f0f0f0;
+}
+.icd10List li span.code {
+  width: 125px;
+}
+.icd10List li span.description {
+  flex-grow: 1;
+}

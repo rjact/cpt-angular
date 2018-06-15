@@ -1,3 +1,6 @@
+@blue: #65a0cd;
+@dark: #4d4d4d;
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	padding:15px;
@@ -14,6 +17,17 @@ body {
 	
 }
 
+.btn {
+	min-width:100px;
+	padding:0 6px;
+	height: 25px;
+	line-height: 25px;
+	border-radius:6px;
+	text-align: center;
+	color:#fff;
+	background:@blue;
+	cursor:pointer;
+}
 .popup {
 	position: absolute;
 	top: 50%;
@@ -29,4 +43,71 @@ body {
 	border:solid 1px #000;
 	max-height: 65%;
 	overflow:auto;
+
+	.titlebar {
+		display: flex;
+		justify-content: space-between;
+		height:40px;
+		padding:10px;
+		border-bottom:solid 1px @dark;
+		font-weight: bold;
+
+		span {
+			flex-grow: 1;
+		}
+
+		.close {
+			flex-grow: 0;
+			
+			&:after {
+				content: 'X';
+				width:13px;
+				height:13px;
+				border:solid 1px #000;
+				border-radius: 3px;
+				padding:3px;
+				line-height: 14px;
+				text-align: center;
+				display: block;
+			}
+		}
+	}
+}
+
+.loadingIndicator {
+	text-align: center;
+	font-size: 26px;
+	position: relative;
+	width: 80px;
+	margin: 0px auto;
+
+	& > div {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border-radius: 100%;
+		background-color: @blue;
+		margin:0 3px;
+		-webkit-animation: bouncedelay 0.7s infinite ease-in-out both;
+		animation: bouncedelay 0.7s infinite ease-in-out both;
+
+		&.one {
+			animation-delay: -0.16s;
+		}
+		&.two {
+			animation-delay: -0.08s;
+		}
+	}
+}
+
+
+@keyframes bouncedelay {
+	0%, 80%, 100% {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	40% {
+		transform: scale(1);
+		-webkit-transform: scale(1);
+	}
 }

@@ -15,6 +15,7 @@ export class EntryComponent implements OnInit {
 	public entry: Entry;
 	public newCode:string;
 	private activeCpt:string = '';
+	private showIcd10List:boolean = false;
 	constructor(private dataService: DataService){}
     
     ngOnInit():void {
@@ -32,6 +33,7 @@ export class EntryComponent implements OnInit {
 	}
 	getIcd10s(cpt) {
 		this.activeCpt = cpt;
+		this.showIcd10List = true;
 	}
 	addIcd10(icd10) {
 		const currCpt = this.entry.CptCodes.filter(c => c.CPTCode == this.activeCpt);
@@ -39,5 +41,8 @@ export class EntryComponent implements OnInit {
 	}
 	removeIcd10(cpt:CptCode, code:string) {
 		cpt.ICD10Codes = cpt.ICD10Codes.filter(i => i.ICD_10CMCode != code);
+	}
+	closeModal(val:number) {
+		this.showIcd10List = false;
 	}
 }

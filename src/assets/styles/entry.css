@@ -1,12 +1,11 @@
 .container {
   display: flex;
 }
-.container > div {
-  padding: 0 auto;
-  width: 400px;
-}
 .container ul li {
   margin-bottom: 15px;
+}
+.container .patientInfo {
+  width: 400px;
 }
 .container .patientInfo dl dt {
   margin-bottom: 6px;
@@ -23,4 +22,20 @@
 }
 .container .cptSection .cptInfo {
   display: flex;
+}
+.container .cptSection .cptInfo .code {
+  width: 75px;
+}
+.container .cptSection .cptInfo .description {
+  padding-right: 12px;
+}
+.container .cptSection ul.icd10s li {
+  display: flex;
+  width: 60%;
+}
+.container .cptSection ul.icd10s li .icd10code {
+  width: 100px;
+}
+.container .cptSection ul.icd10s li .icd10desc {
+  flex-grow: 1;
 }
