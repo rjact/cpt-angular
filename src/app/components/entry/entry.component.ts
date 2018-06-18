@@ -14,7 +14,7 @@ import { Icd10Code } from '../../models/Icd10Code';
 export class EntryComponent implements OnInit {
 	public entry: Entry;
 	public newCode:string;
-	private activeCpt:string = '';
+	private activeCpt:CptCode;
 	private showIcd10List:boolean = false;
 	constructor(private dataService: DataService){}
     
@@ -26,7 +26,12 @@ export class EntryComponent implements OnInit {
 		if(this.newCode) {
 			this.dataService.getCptCode(this.newCode).subscribe(cpt => {
 				if(cpt.length > 0) {
+					let newCpt = new CptCode(cpt[0]);
 					this.entry.CptCodes.push(new CptCode(cpt[0]));
+					let icdSubscription = this.dataService.getIcd10Codes(cpt[0].CPTCode).subscribe(icd => {
+						this.entry.CptCodes.filter(o => o.CPTCode == newCpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
+						icdSubscription.unsubscribe();
+					})
 				}
 			});
 		}
@@ -36,7 +41,7 @@ export class EntryComponent implements OnInit {
 		this.showIcd10List = true;
 	}
 	addIcd10(icd10) {
-		const currCpt = this.entry.CptCodes.filter(c => c.CPTCode == this.activeCpt);
+		const currCpt = this.entry.CptCodes.filter(c => c.CPTCode == this.activeCpt.CPTCode);
 		currCpt[0].ICD10Codes.push(icd10);
 	}
 	removeIcd10(cpt:CptCode, code:string) {

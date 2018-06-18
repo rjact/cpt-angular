@@ -18,8 +18,8 @@
 			<li *ngFor="let cpt of entry.CptCodes">
 				<div class="cptInfo">
 					<div class="code">{{cpt.CPTCode}}</div>
-					<div class="description">{{cpt.FullDescriptor}}</div>
-					<div class="btn addIcd10" (click)="getIcd10s(cpt.CPTCode)">ICD-10 Codes</div>
+					<div class="description">{{cpt.FullDescriptor}} [ {{cpt.AllIcd10Codes.length}} ]</div>
+					<div class="btn addIcd10" (click)="getIcd10s(cpt)">ICD-10 Codes</div>
 				</div>
 				<ul class="icd10s" *ngIf="cpt.ICD10Codes.length > 0">
 					<li *ngFor="let icd10 of cpt.ICD10Codes">
@@ -36,4 +36,4 @@
 		</div>
 	</div>
 
-	<icd10codes [cpt]="activeCpt" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
+	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
