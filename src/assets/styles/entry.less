@@ -1,13 +1,7 @@
-
+@import './variables.less';
 
 .container {
 	display:flex;
-
-	ul {
-		li { 
-			margin-bottom:15px;
-		}
-	}
 
 	.patientInfo {
 		width:400px;
@@ -25,33 +19,75 @@
 		}
 	}
 	.cptSection {
+
+		.cptItem {
+			border:solid 2px @blue;
+			margin:8px 0;
+	
+			header {
+				background-color:@blue;
+				display:flex;
+				justify-content: space-between;
+				padding:6px 20px;
+				.code {
+					font-weight: bold;
+					color: #fff;
+					align-self: center;
+				}
+			}
+			.cptInfo {
+				padding:14px;
+				
+				.description {
+					font-weight: bold;
+					font-size:22px;
+				}
+			}
+			.icd10Container {
+				padding:0 14px;
+				h3 {
+					font-style: italic;
+					padding-bottom:8px;
+				}
+				ul.icd10s {
+					border:solid 1px @lightgrey;
+					width:80%;
+					li {
+						display: flex;
+						align-items: center;
+						width:100%;
+						padding:12px 6px;
+						
+						.icd10code {
+							width:100px;
+						}
+						.icd10desc {
+							flex-grow:1;
+							padding:0 6px;
+						}
+						&:nth-child(odd) {
+							background-color: @lightgrey;
+						}
+					}
+				}
+			}
+			.cptActions {
+				padding:14px;
+				text-align: right;
+			}
+		}
+		
 		input {
 			padding: 4px;
 		}
-		.cptInfo {
-			display:flex;
 
-			.code {
-				width:75px;
-			}
-			.description {
-				padding-right:12px;
-			}
-
-		}
-		ul.icd10s {
-			li {
-				display: flex;
-				width:60%;
-				.icd10code {
-					width:100px;
-				}
-				.icd10desc {
-					flex-grow:1;
-				}
-			}
-		}
 
 	}
 
+}
+
+@media (max-width:1025px) {
+	.container {
+		flex-direction: column;
+	}
 }

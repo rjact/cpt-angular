@@ -15,23 +15,31 @@
 	<div class="cptSection">
 		<h2>CPT Codes</h2>
 		<ul id="cptCodeList">
-			<li *ngFor="let cpt of entry.CptCodes">
-				<div class="cptInfo">
+			<li *ngFor="let cpt of entry.CptCodes" class="cptItem">
+				<header>
 					<div class="code">{{cpt.CPTCode}}</div>
+					<div class="btn red" (click)="removeCpt(cpt.CPTCode)">Remove</div>
+				</header>
+				<div class="cptInfo">
 					<div class="description">{{cpt.FullDescriptor}} [ {{cpt.AllIcd10Codes.length}} ]</div>
-					<div class="btn addIcd10" (click)="getIcd10s(cpt)">ICD-10 Codes</div>
 				</div>
-				<ul class="icd10s" *ngIf="cpt.ICD10Codes.length > 0">
-					<li *ngFor="let icd10 of cpt.ICD10Codes">
-						<div class="icd10code">{{icd10.ICD_10CMCode}}</div>
-						<div class="icd10desc">{{icd10.ICD_10CMFullDescription}}</div>
-						<div class="btn" (click)="removeIcd10(cpt, icd10.ICD_10CMCode)">Remove</div>
-					</li>
-				</ul>
+				<div class="icd10Container" *ngIf="cpt.ICD10Codes.length > 0">
+					<h3>ICD10 Codes</h3>
+					<ul class="icd10s">
+						<li *ngFor="let icd10 of cpt.ICD10Codes">
+							<div class="icd10code">{{icd10.ICD_10CMCode}}</div>
+							<div class="icd10desc">{{icd10.ICD_10CMFullDescription}}</div>
+							<div class="btn red" (click)="removeIcd10(cpt, icd10.ICD_10CMCode)">Remove</div>
+						</li>
+					</ul>
+				</div>
+				<div class="cptActions">
+					<div class="btn addIcd10" (click)="getIcd10s(cpt)">Add New ICD10</div>
+				</div>
 			</li>
 		</ul>
 		<div>
-			<input type="text" class="form-control" [(ngModel)]="newCode">
+			<input type="text" class="form-control" [(ngModel)]="newCode" (keyup)="checkEnter($event)">
 			<button (click)="add()">Add New</button>
 		</div>
 	</div>

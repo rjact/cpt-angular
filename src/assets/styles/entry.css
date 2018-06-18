@@ -1,9 +1,6 @@
 .container {
   display: flex;
 }
-.container ul li {
-  margin-bottom: 15px;
-}
 .container .patientInfo {
   width: 400px;
 }
@@ -17,25 +14,64 @@
   padding: 4px;
   width: 350px;
 }
+.container .cptSection .cptItem {
+  border: solid 2px #65a0cd;
+  margin: 8px 0;
+}
+.container .cptSection .cptItem header {
+  background-color: #65a0cd;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 20px;
+}
+.container .cptSection .cptItem header .code {
+  font-weight: bold;
+  color: #fff;
+  align-self: center;
+}
+.container .cptSection .cptItem .cptInfo {
+  padding: 14px;
+}
+.container .cptSection .cptItem .cptInfo .description {
+  font-weight: bold;
+  font-size: 22px;
+}
+.container .cptSection .cptItem .icd10Container {
+  padding: 0 14px;
+}
+.container .cptSection .cptItem .icd10Container h3 {
+  font-style: italic;
+  padding-bottom: 8px;
+}
+.container .cptSection .cptItem .icd10Container ul.icd10s {
+  border: solid 1px #f0f0f0;
+  width: 80%;
+}
+.container .cptSection .cptItem .icd10Container ul.icd10s li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 6px;
+}
+.container .cptSection .cptItem .icd10Container ul.icd10s li .icd10code {
+  width: 100px;
+}
+.container .cptSection .cptItem .icd10Container ul.icd10s li .icd10desc {
+  flex-grow: 1;
+  padding: 0 6px;
+}
+.container .cptSection .cptItem .icd10Container ul.icd10s li:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+.container .cptSection .cptItem .cptActions {
+  padding: 14px;
+  text-align: right;
+}
 .container .cptSection input {
   padding: 4px;
 }
-.container .cptSection .cptInfo {
-  display: flex;
-}
-.container .cptSection .cptInfo .code {
-  width: 75px;
-}
-.container .cptSection .cptInfo .description {
-  padding-right: 12px;
-}
-.container .cptSection ul.icd10s li {
-  display: flex;
-  width: 60%;
-}
-.container .cptSection ul.icd10s li .icd10code {
-  width: 100px;
-}
-.container .cptSection ul.icd10s li .icd10desc {
-  flex-grow: 1;
+@media (max-width: 1025px) {
+  .container {
+    flex-direction: column;
+  }
 }

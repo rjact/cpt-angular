@@ -33,6 +33,7 @@ export class EntryComponent implements OnInit {
 						icdSubscription.unsubscribe();
 					})
 				}
+				this.newCode = '';
 			});
 		}
 	}
@@ -49,5 +50,10 @@ export class EntryComponent implements OnInit {
 	}
 	closeModal(val:number) {
 		this.showIcd10List = false;
+	}
+	checkEnter(event) {
+		if(event.keyCode == 13) {
+			this.add();
+		}
 	}
 }

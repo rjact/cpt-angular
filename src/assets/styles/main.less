@@ -1,5 +1,4 @@
-@blue: #65a0cd;
-@dark: #4d4d4d;
+@import './variables.less';
 
 body {
 	font-family: Arial, Helvetica, sans-serif;
@@ -27,6 +26,11 @@ body {
 	color:#fff;
 	background:@blue;
 	cursor:pointer;
+	display: inline-block;
+
+	&.red {
+		background-color:@red;
+	}
 }
 .popup {
 	position: absolute;

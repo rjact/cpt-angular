@@ -21,6 +21,10 @@ body ul {
   color: #fff;
   background: #65a0cd;
   cursor: pointer;
+  display: inline-block;
+}
+.btn.red {
+  background-color: #ED1C24;
 }
 .popup {
   position: absolute;
