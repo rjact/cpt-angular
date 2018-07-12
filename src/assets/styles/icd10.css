@@ -7,7 +7,8 @@
   background-color: #f0f0f0;
 }
 .icd10List li span.code {
-  width: 125px;
+  width: 100px;
+  flex-shrink: 0;
 }
 .icd10List li span.description {
   flex-grow: 1;

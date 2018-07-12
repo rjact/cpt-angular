@@ -29,6 +29,7 @@ body ul {
 .btn.disabled {
   cursor: default;
   background: #f0f0f0;
+  border: dotted 1px #ccc;
 }
 .popup {
   position: absolute;
