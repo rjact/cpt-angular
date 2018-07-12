@@ -5,6 +5,8 @@
 
 	.patientInfo {
 		width:400px;
+		background:@lightgrey;
+		
 		dl {
 			dt {
 				margin-bottom: 6px;
@@ -19,7 +21,7 @@
 		}
 	}
 	.cptSection {
-
+		margin:0 20px;
 		.cptItem {
 			border:solid 2px @blue;
 			margin:8px 0;
@@ -89,5 +91,9 @@
 @media (max-width:1025px) {
 	.container {
 		flex-direction: column;
+
+		.patientInfo {
+			margin:0 20px;
+		}
 	}
 }

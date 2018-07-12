@@ -17,7 +17,7 @@
 				<li *ngFor="let icd10 of icd10codes">
 					<span class="code">{{icd10.ICD_10CMCode}}</span>
 					<span class="description">{{icd10.ICD_10CMFullDescription}}</span>
-					<div class="btn" (click)="addIcd10(icd10)">Add</div>
+					<div class="btn" (click)="addIcd10(icd10)" [ngClass]="{disabled: icd10.isIncluded}">Add</div>
 				</li>
 			</ul>
 		</main>

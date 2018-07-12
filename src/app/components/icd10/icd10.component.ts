@@ -20,7 +20,10 @@ export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 	}
 
 	addIcd10(icd10) {
-		this.onAddIcd10.next(icd10);
+		if(!icd10.isIncluded) {
+			icd10.isIncluded = true;
+			this.onAddIcd10.next(icd10);
+		}
 	}
 	close() {
 		this.onClose.next(0);

@@ -41,6 +41,9 @@ export class EntryComponent implements OnInit {
 		this.activeCpt = cpt;
 		this.showIcd10List = true;
 	}
+	removeCpt(cpt:string) {
+		this.entry.CptCodes = this.entry.CptCodes.filter(c => c.CPTCode != cpt);
+	}
 	addIcd10(icd10) {
 		const currCpt = this.entry.CptCodes.filter(c => c.CPTCode == this.activeCpt.CPTCode);
 		currCpt[0].ICD10Codes.push(icd10);

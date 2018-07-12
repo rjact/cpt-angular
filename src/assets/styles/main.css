@@ -26,6 +26,10 @@ body ul {
 .btn.red {
   background-color: #ED1C24;
 }
+.btn.disabled {
+  cursor: default;
+  background: #f0f0f0;
+}
 .popup {
   position: absolute;
   top: 50%;
