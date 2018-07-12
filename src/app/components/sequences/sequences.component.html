@@ -1,0 +1,32 @@
+
+<div class="sequenceList popup">
+	<div class="loading" *ngIf="loading">
+		<div class="loadingIndicator">
+			<div class="one"></div>
+			<div class="two"></div>
+			<div class="three"></div>
+		</div>
+	</div>
+	<div class="popupContents" *ngIf="!loading">
+		<div class="titlebar">
+			<span>{{title}}</span>
+			<div class="close" (click)="close()"></div>
+		</div>
+		<main *ngIf="sequences && sequences.length > 0">
+			<ul>
+				<li *ngFor="let seq of sequences">
+					<span class="range" (click)="drilldown(seq.CPTSectionID)">{{seq.CodeRange}}</span>
+					<span class="description">{{seq.Sequence}}</span>
+				</li>
+			</ul>
+		</main>
+		<main *ngIf="cpts && cpts.length > 0">
+			<ul>
+				<li *ngFor="let cpt of cpts">
+					<span class="cptcode" (click)="selectCpt(cpt)">{{cpt.CPTCode}}</span>
+					<span class="description">{{cpt.ShortDescriptor}}</span>
+				</li>
+			</ul>
+		</main>
+	</div>
+</div>

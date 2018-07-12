@@ -16,6 +16,7 @@ export class EntryComponent implements OnInit {
 	public newCode:string;
 	private activeCpt:CptCode;
 	private showIcd10List:boolean = false;
+	private showSequences:boolean = false;
 	constructor(private dataService: DataService){}
     
     ngOnInit():void {
@@ -53,10 +54,18 @@ export class EntryComponent implements OnInit {
 	}
 	closeModal(val:number) {
 		this.showIcd10List = false;
+		this.showSequences = false;
 	}
 	checkEnter(event) {
 		if(event.keyCode == 13) {
 			this.add();
 		}
+	}
+	addCpt(cpt) {
+		this.entry.CptCodes.push(new CptCode(cpt));
+		this.closeModal(0);
+	}
+	viewSequences() {
+		this.showSequences = true;
 	}
 }

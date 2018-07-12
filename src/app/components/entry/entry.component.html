@@ -42,6 +42,8 @@
 			<input type="text" class="form-control" [(ngModel)]="newCode" (keyup)="checkEnter($event)">
 			<button (click)="add()">Add New</button>
 		</div>
+		<div><button (click)="viewSequences()">View Sequences</button></div>
 	</div>
 
 	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
+	<sequences *ngIf="showSequences" (onAddCpt)="addCpt($event)" (onClose)="closeModal($event)"></sequences>

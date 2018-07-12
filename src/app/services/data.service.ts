@@ -30,4 +30,13 @@ export class DataService {
 		return this.http.get(`${this.API_ROOT}getIcd10Codes?cpt=${cptCode}`)
 			.map((resp:any) => resp.json());
 	}
+
+	getSequences(parentId: number):any {
+		return this.http.get(`${this.API_ROOT}getSequences?ParentId=${parentId}`)
+			.map((resp:any) => resp.json());
+	}
+	getCptsForSequence(sequenceId: number):any {
+		return this.http.get(`${this.API_ROOT}getCptsForSequence?SequenceId=${sequenceId}`)
+			.map((resp:any) => resp.json());
+	}
 }

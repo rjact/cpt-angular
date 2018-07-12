@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { EntryComponent } from './components/entry/entry.component';
 import { Icd10Component } from './components/icd10/icd10.component';
 import { DataService } from './services/data.service';
+import { SequencesComponent } from './components/sequences/sequences.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 	EntryComponent,
-	Icd10Component
+	Icd10Component,
+	SequencesComponent
   ],
   imports: [
 	  BrowserModule, 
