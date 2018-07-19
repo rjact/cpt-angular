@@ -1,1 +1,21 @@
 @import './variables.less';
+.sequenceList {
+	.popupContents {
+		main {
+			li {
+				padding:8px 10px;
+				display: flex;
+				.range, .cptcode {
+					width:15%;
+					font-weight: bold;
+					color:@blue;
+					cursor:pointer;
+				}
+
+				&:nth-child(odd) {
+					background-color: @lightgrey;
+				}
+			}
+		}
+	}
+}

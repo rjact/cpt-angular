@@ -10,7 +10,7 @@ import { Sequence } from '../../models/Sequence';
 	selector: 'sequences',
   	templateUrl: './sequences.component.html',
   	styleUrls: [
-		'../../../assets/styles/entry.css'
+		'../../../assets/styles/sequences.css'
   	]
 })
 export class SequencesComponent implements OnInit {

@@ -1,8 +1,10 @@
 .container {
   display: flex;
+  height: 100%;
 }
 .container .patientInfo {
   width: 400px;
+  padding: 18px;
   background: #f0f0f0;
 }
 .container .patientInfo dl dt {

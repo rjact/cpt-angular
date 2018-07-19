@@ -1,0 +1,14 @@
+.sequenceList .popupContents main li {
+  padding: 8px 10px;
+  display: flex;
+}
+.sequenceList .popupContents main li .range,
+.sequenceList .popupContents main li .cptcode {
+  width: 15%;
+  font-weight: bold;
+  color: #65a0cd;
+  cursor: pointer;
+}
+.sequenceList .popupContents main li:nth-child(odd) {
+  background-color: #f0f0f0;
+}

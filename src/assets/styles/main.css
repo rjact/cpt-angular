@@ -1,7 +1,11 @@
+html {
+  height: 100%;
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 15px;
   position: relative;
+  height: 100%;
 }
 body h2 {
   font-weight: bold;
@@ -71,6 +75,12 @@ body ul {
   line-height: 14px;
   text-align: center;
   display: block;
+}
+.popup .popupContents h2 {
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px 0;
 }
 .loadingIndicator {
   text-align: center;
