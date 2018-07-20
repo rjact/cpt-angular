@@ -10,7 +10,7 @@
 	<div class="popupContents" *ngIf="!loading">
 		<div class="titlebar">
 			<span>{{title}}</span>
-			<div class="close" (click)="close()"></div>
+			<div class="btn red" (click)="close()">Close</div>
 		</div>
 		<main *ngIf="sequences && sequences.length > 0">
 			<ul>
