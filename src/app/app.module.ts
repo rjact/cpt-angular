@@ -9,10 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { EntryComponent } from './components/entry/entry.component';
 import { Icd10Component } from './components/icd10/icd10.component';
 import { DataService } from './services/data.service';
+import { SessionService } from './services/session.service';
+import { AuthGuard } from './auth.guard';
 import { SequencesComponent } from './components/sequences/sequences.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
+	  LoginComponent,
     AppComponent,
 	EntryComponent,
 	Icd10Component,
@@ -26,7 +30,7 @@ import { SequencesComponent } from './components/sequences/sequences.component';
 	  FormsModule,
 	  HttpModule
 	],
-  providers: [DataService],
+  providers: [DataService, AuthGuard, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
