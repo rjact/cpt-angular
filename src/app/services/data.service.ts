@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 export class DataService {
 	constructor(private http:Http) {}
 	
-    private API_ROOT = 'http://localhost:53614/Home/';
+    private API_ROOT = 'https://sandiasoft-server.azurewebsites.net/Home/';
     
     private getHeaders():any {
         let headers = new Headers();  
