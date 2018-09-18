@@ -21,6 +21,7 @@ export class EntryComponent implements OnInit {
     
     ngOnInit():void {
 		this.entry = new Entry();
+		this.showSequences = true;
 	}
 	
 	add(): void {
@@ -63,7 +64,11 @@ export class EntryComponent implements OnInit {
 	}
 	addCpt(cpt) {
 		this.entry.CptCodes.push(new CptCode(cpt));
-		this.closeModal(0);
+		let icdSubscription = this.dataService.getIcd10Codes(cpt.CPTCode).subscribe(icd => {
+			this.entry.CptCodes.filter(o => o.CPTCode == cpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
+			icdSubscription.unsubscribe();
+		})
+	this.closeModal(0);
 	}
 	viewSequences() {
 		this.showSequences = true;
