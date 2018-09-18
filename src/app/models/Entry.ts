@@ -1,7 +1,8 @@
 import { CptCode } from "./CptCode";
 
 export class Entry {
-	public Name: string;
+	public FirstName: string;
+	public LastName: string;
 	public Dob: Date;
 	public ProcedureDate: Date;
 	public Ehr: string;

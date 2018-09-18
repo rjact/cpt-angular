@@ -2,8 +2,10 @@
 	<div class="patientInfo">
 		<h2>Patient Information</h2>
 		<dl>
-			<dt><label for="patientName">Patient Name</label></dt>
-			<dd><input type="text" [(ngModel)]="entry.Name" class="form-control" /></dd>
+			<dt><label for="patientFirstName">Patient First Name</label></dt>
+			<dd><input type="text" [(ngModel)]="entry.FirstName" class="form-control" /></dd>
+			<dt><label for="patientLastName">Patient Last Name</label></dt>
+			<dd><input type="text" [(ngModel)]="entry.LastName" class="form-control" /></dd>
 			<dt><label for="dob">Date of Birth</label></dt>
 			<dd><input type="date" [(ngModel)]="entry.Dob"class="form-control" /></dd>
 			<dt><label for="procedureDate">Date of Procedure</label></dt>
