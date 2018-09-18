@@ -6,6 +6,8 @@ body {
   padding: 15px;
   position: relative;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 body h2 {
   font-weight: bold;
@@ -34,6 +36,9 @@ body ul {
   cursor: default;
   background: #f0f0f0;
   border: dotted 1px #ccc;
+}
+.btn.dark {
+  background-color: #4d4d4d;
 }
 .popup {
   position: absolute;
@@ -66,7 +71,7 @@ body ul {
   flex-grow: 0;
 }
 .popup .titlebar .close:after {
-  content: 'X';
+  content: 'Close';
   width: 13px;
   height: 13px;
   border: solid 1px #000;
