@@ -62,7 +62,7 @@ body {
 	background:#fff;
 	box-shadow: 0px 0px 1000px 1000px rgba(0,0,0,.6);
 	border:solid 1px #000;
-	max-height: 65%;
+	height: 70%;
 	overflow:auto;
 
 	.titlebar {
@@ -72,6 +72,12 @@ body {
 		padding:10px;
 		border-bottom:solid 1px @dark;
 		font-weight: bold;
+
+		position: absolute;
+		top:0;
+		height:50px;	
+		background:#fff;
+		width: ~"calc(100% - 30px)";
 
 		span {
 			flex-grow: 1;
@@ -94,6 +100,13 @@ body {
 		}
 	}
 
+	main {
+		position: absolute;
+		top:50px;
+		overflow-y:auto;
+		height:~"calc(100% - 50px)";
+		width:~"calc(100% - 30px)";
+	}
 	.popupContents {
 		h2 {
 			font-weight: bold;

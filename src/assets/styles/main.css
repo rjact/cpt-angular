@@ -56,7 +56,7 @@ body .highlight {
   background: #fff;
   box-shadow: 0px 0px 1000px 1000px rgba(0, 0, 0, 0.6);
   border: solid 1px #000;
-  max-height: 65%;
+  height: 70%;
   overflow: auto;
 }
 .popup .titlebar {
@@ -66,6 +66,11 @@ body .highlight {
   padding: 10px;
   border-bottom: solid 1px #4d4d4d;
   font-weight: bold;
+  position: absolute;
+  top: 0;
+  height: 50px;
+  background: #fff;
+  width: calc(100% - 30px);
 }
 .popup .titlebar span {
   flex-grow: 1;
@@ -83,6 +88,13 @@ body .highlight {
   line-height: 14px;
   text-align: center;
   display: block;
+}
+.popup main {
+  position: absolute;
+  top: 50px;
+  overflow-y: auto;
+  height: calc(100% - 50px);
+  width: calc(100% - 30px);
 }
 .popup .popupContents h2 {
   font-weight: bold;
