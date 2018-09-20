@@ -46,11 +46,10 @@ export class EntryComponent implements OnInit {
 		}
 	}
 	search():void {
-		if(this.searchTerm.length == 0) {
+		if(this.searchTerm.length < 3) {
 			this.searchResults = null;
 			return;
 		}
-		if(this.searchTerm.length < 3) return;
 		this.searchService.searchCpt(this.searchTerm).subscribe(res => {
 			this.searchResults = res;
 		})

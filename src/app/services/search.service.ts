@@ -12,7 +12,7 @@ export class SearchService {
 	constructor(private dataService:DataService) {}
 
 	searchCpt(searchTerm:string): Observable<Array<CptCode>> {
-		searchTerm = searchTerm.toLowerCase();
+		let searchWords = searchTerm.trim().toLowerCase().split(' ');
 		//find out if we did the search already
 		const prior = this.searches.filter(s => searchTerm.indexOf(s.key) > -1);
 		if(prior.length === 0) {
@@ -30,7 +30,7 @@ export class SearchService {
 				if(a.key.length < b.key.length) return 1;
 				return 0;
 			})[0];
-			const newResults = bestMatch.results.filter(r => r.FullDescriptor.toLowerCase().indexOf(searchTerm) > -1);
+			const newResults = bestMatch.results.filter(r => searchWords.every(w => r.FullDescriptor.toLowerCase().indexOf(w) > -1));
 			this.searches.push(new PriorCptSearches(searchTerm, newResults));
 			return Observable.of(newResults);
 		}
