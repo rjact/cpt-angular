@@ -4,6 +4,9 @@ import { DataService } from '../../services/data.service';
 import { CptCode } from '../../models/CptCode';
 import { Entry } from '../../models/Entry';
 import { Icd10Code } from '../../models/Icd10Code';
+import { SearchService } from '../../services/search.service';
+import { HighlightTermPipe } from '../../pipes/highlight-term.pipe';
+import { KeepHtmlPipe } from '../../pipes/keep-html.pipe';
 
 @Component({
   templateUrl: './entry.component.html',
@@ -14,17 +17,20 @@ import { Icd10Code } from '../../models/Icd10Code';
 export class EntryComponent implements OnInit {
 	public entry: Entry;
 	public newCode:string;
+	private searchTerm:string;
+	private searchResults:Array<CptCode>;
+
 	private activeCpt:CptCode;
 	private showIcd10List:boolean = false;
 	private showSequences:boolean = false;
-	constructor(private dataService: DataService){}
+	constructor(private dataService: DataService, private searchService:SearchService){}
     
     ngOnInit():void {
 		this.entry = new Entry();
 		this.showSequences = true;
 	}
 	
-	add(): void {
+	addByCptCode(): void {
 		if(this.newCode) {
 			this.dataService.getCptCode(this.newCode).subscribe(cpt => {
 				if(cpt.length > 0) {
@@ -38,6 +44,16 @@ export class EntryComponent implements OnInit {
 				this.newCode = '';
 			});
 		}
+	}
+	search():void {
+		if(this.searchTerm.length == 0) {
+			this.searchResults = null;
+			return;
+		}
+		if(this.searchTerm.length < 3) return;
+		this.searchService.searchCpt(this.searchTerm).subscribe(res => {
+			this.searchResults = res;
+		})
 	}
 	getIcd10s(cpt) {
 		this.activeCpt = cpt;
@@ -57,9 +73,17 @@ export class EntryComponent implements OnInit {
 		this.showIcd10List = false;
 		this.showSequences = false;
 	}
-	checkEnter(event) {
+	checkEnter(event, type) {
 		if(event.keyCode == 13) {
-			this.add();
+			switch(type) {
+				case 'code':
+					this.addByCptCode();
+					break;
+				case 'search':
+					this.search();
+					break;
+			}
+			
 		}
 	}
 	addCpt(cpt) {
@@ -68,7 +92,9 @@ export class EntryComponent implements OnInit {
 			this.entry.CptCodes.filter(o => o.CPTCode == cpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
 			icdSubscription.unsubscribe();
 		})
-	this.closeModal(0);
+		this.searchResults = null;
+		this.searchTerm = '';
+		this.closeModal(0);
 	}
 	viewSequences() {
 		this.showSequences = true;

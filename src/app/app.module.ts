@@ -13,6 +13,9 @@ import { SessionService } from './services/session.service';
 import { AuthGuard } from './auth.guard';
 import { SequencesComponent } from './components/sequences/sequences.component';
 import { LoginComponent } from './components/login/login.component';
+import { SearchService } from './services/search.service';
+import { HighlightTermPipe } from './pipes/highlight-term.pipe';
+import { KeepHtmlPipe } from './pipes/keep-html.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { LoginComponent } from './components/login/login.component';
     AppComponent,
 	EntryComponent,
 	Icd10Component,
-	SequencesComponent
+	SequencesComponent,
+	HighlightTermPipe,
+	KeepHtmlPipe
   ],
   imports: [
 	  BrowserModule, 
@@ -30,7 +35,7 @@ import { LoginComponent } from './components/login/login.component';
 	  FormsModule,
 	  HttpModule
 	],
-  providers: [DataService, AuthGuard, SessionService],
+  providers: [DataService, AuthGuard, SessionService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

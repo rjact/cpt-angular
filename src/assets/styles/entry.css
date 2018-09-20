@@ -20,6 +20,25 @@
 .container .cptSection {
   margin: 0 20px;
 }
+.container .cptSection .actions .searchResults {
+  position: absolute;
+  z-index: 2;
+  background: #ffffff;
+  border: solid 1px #000;
+}
+.container .cptSection .actions .searchResults li {
+  display: flex;
+}
+.container .cptSection .actions .searchResults li div {
+  padding: 8px;
+}
+.container .cptSection .actions .searchResults li div:nth-child(1) {
+  width: 10%;
+  flex-shrink: 0;
+}
+.container .cptSection .actions .searchResults li:nth-child(odd) {
+  background: #f0f0f0;
+}
 .container .cptSection .cptItem {
   border: solid 2px #65a0cd;
   margin: 8px 0;

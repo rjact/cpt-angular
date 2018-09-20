@@ -24,6 +24,30 @@
 	}
 	.cptSection {
 		margin:0 20px;
+
+		.actions {
+			.searchResults {
+				position: absolute;
+				z-index: 2;
+				background:#ffffff;
+				border:solid 1px #000;
+
+				li {
+					display: flex;
+
+					div {
+						padding:8px;
+					}
+					div:nth-child(1) {
+						width:10%;
+						flex-shrink: 0;
+					}
+					&:nth-child(odd) {
+						background:@lightgrey;
+					}
+				}
+			}
+		}
 		.cptItem {
 			border:solid 2px @blue;
 			margin:8px 0;

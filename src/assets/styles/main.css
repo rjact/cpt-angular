@@ -17,6 +17,9 @@ body h2 {
 body ul {
   list-style-type: none;
 }
+body .highlight {
+  font-weight: bold;
+}
 .btn {
   min-width: 100px;
   padding: 0 6px;

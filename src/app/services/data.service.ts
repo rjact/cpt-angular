@@ -3,12 +3,14 @@ import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { CptCode } from '../models/CptCode';
 
 @Injectable()
 export class DataService {
 	constructor(private http:Http) {}
 	
-    private API_ROOT = 'https://sandiasoft-server.azurewebsites.net/Home/';
+	//private API_ROOT = 'https://sandiasoft-server.azurewebsites.net/Home/';
+	private API_ROOT = 'http://localhost:53614/Home/';
     
     private getHeaders():any {
         let headers = new Headers();  
@@ -37,6 +39,11 @@ export class DataService {
 	}
 	getCptsForSequence(sequenceId: number):any {
 		return this.http.get(`${this.API_ROOT}getCptsForSequence?SequenceId=${sequenceId}`)
+			.map((resp:any) => resp.json());
+	}
+
+	searchCpt(searchTerm:string):Observable<Array<CptCode>> {
+		return this.http.get(`${this.API_ROOT}searchCpt?term=${searchTerm}`)
 			.map((resp:any) => resp.json());
 	}
 }

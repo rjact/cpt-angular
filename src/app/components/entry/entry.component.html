@@ -15,6 +15,34 @@
 		</dl>
 	</div>
 	<div class="cptSection">
+		<div class="actions">
+			<div class="byCode">
+				<div class="actionBtn">Enter Code</div>
+				<div class="form">
+					<input type="text" class="form-control" [(ngModel)]="newCode" (keyup)="checkEnter($event, 'code')">
+					<div class="btn dark" (click)="addByCptCode()">Add New</div>
+				</div>
+			</div>
+			<div class="bySearch">
+				<div class="actionBtn">Search</div>
+				<div class="form">
+					<input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search()"/>
+					<div class="btn dark" (click)="search()">Search</div>
+				</div>
+				<div class="searchResults" *ngIf="searchResults">
+					<ul>
+						<li *ngFor="let res of searchResults">
+							<div (click)="addCpt(res)">{{res.CPTCode}}</div>
+							<div [innerHTML]="res.FullDescriptor | highlight: searchTerm | keepHtml"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="bySequence">
+				<div class="actionBtn" (click)="viewSequences()">View Sequences</div>
+			</div>
+		
+		</div>
 		<h2>CPT Codes</h2>
 		<ul id="cptCodeList">
 			<li *ngFor="let cpt of entry.CptCodes" class="cptItem">
@@ -40,11 +68,6 @@
 				</div>
 			</li>
 		</ul>
-		<div>
-			<input type="text" class="form-control" [(ngModel)]="newCode" (keyup)="checkEnter($event)">
-			<button (click)="add()">Add New</button>
-		</div>
-		<div><button (click)="viewSequences()">View Sequences</button></div>
 	</div>
 
 	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
