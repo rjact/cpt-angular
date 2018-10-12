@@ -19,6 +19,7 @@ body ul {
 }
 body .highlight {
   font-weight: bold;
+  color: #b50101;
 }
 .btn {
   min-width: 100px;
