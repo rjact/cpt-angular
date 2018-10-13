@@ -7,6 +7,7 @@ import { Icd10Code } from '../../models/Icd10Code';
 import { SearchService } from '../../services/search.service';
 import { HighlightTermPipe } from '../../pipes/highlight-term.pipe';
 import { KeepHtmlPipe } from '../../pipes/keep-html.pipe';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   templateUrl: './entry.component.html',
@@ -14,20 +15,34 @@ import { KeepHtmlPipe } from '../../pipes/keep-html.pipe';
 	'../../../assets/styles/entry.css'
   ]
 })
-export class EntryComponent implements OnInit {
+export class EntryComponent implements OnInit, OnDestroy {
 	public entry: Entry;
 	public newCode:string;
 	private searchTerm:string;
 	private searchResults:Array<CptCode>;
+	private cptSearchResults: Array<CptCode>;
+	private allCpts:Array<CptCode>;
 
 	private activeCpt:CptCode;
 	private showIcd10List:boolean = false;
 	private showSequences:boolean = false;
+
+	private searchSubscription:ISubscription;
+	private getAllCptsSubscription:ISubscription;
+
 	constructor(private dataService: DataService, private searchService:SearchService){}
     
     ngOnInit():void {
 		this.entry = new Entry();
 		this.showSequences = true;
+		this.getAllCptsSubscription = this.dataService.getAllCpts().subscribe(res => {
+			this.allCpts = res;
+		})
+	}
+
+	ngOnDestroy():void {
+		if(this.getAllCptsSubscription) { this.getAllCptsSubscription.unsubscribe(); }
+		if(this.searchSubscription) { this.searchSubscription.unsubscribe(); }
 	}
 	
 	addByCptCode(): void {
@@ -50,9 +65,15 @@ export class EntryComponent implements OnInit {
 			this.searchResults = null;
 			return;
 		}
-		this.searchService.searchCpt(this.searchTerm).subscribe(res => {
+		this.searchSubscription = this.searchService.searchCpt(this.searchTerm).subscribe(res => {
 			this.searchResults = res;
 		})
+	}
+	searchCpts():void {
+		if(this.newCode.length < 2) { return; }
+		if(this.allCpts) {
+			this.cptSearchResults = this.allCpts.filter(c => c.CPTCode.startsWith(this.newCode))
+		}
 	}
 	getIcd10s(cpt) {
 		this.activeCpt = cpt;
@@ -92,7 +113,9 @@ export class EntryComponent implements OnInit {
 			icdSubscription.unsubscribe();
 		})
 		this.searchResults = null;
+		this.cptSearchResults = null;
 		this.searchTerm = '';
+		this.newCode = '';
 		this.closeModal(0);
 	}
 	viewSequences() {

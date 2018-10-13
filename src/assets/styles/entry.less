@@ -31,6 +31,7 @@
 				z-index: 2;
 				background:#ffffff;
 				border:solid 1px #000;
+				min-width: 50%;;
 
 				li {
 					display: flex;
@@ -102,6 +103,13 @@
 			.cptActions {
 				padding:14px;
 				text-align: right;
+
+				.btn {
+					&.disabled {
+						background:@disabledBtn;
+						cursor: default;
+					}
+				}
 			}
 		}
 		

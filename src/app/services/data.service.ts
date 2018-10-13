@@ -19,6 +19,10 @@ export class DataService {
 		return {headers: headers};
 	}
 
+	getAllCpts() {
+		return this.http.get(`${this.API_ROOT}getAllCpts`)
+			.map((resp:any) => resp.json());
+	}
 	getCptCode(code:string) {
 		return this.http.get(`${this.API_ROOT}getCptCode?code=${code}`)
 			.map((resp:any) => resp.json());
@@ -43,7 +47,7 @@ export class DataService {
 	}
 
 	searchCpt(searchTerm:string):Observable<Array<CptCode>> {
-		return this.http.get(`${this.API_ROOT}searchCpt?term=${searchTerm}`)
+		return this.http.get(`${this.API_ROOT}searchDescription?term=${searchTerm}`)
 			.map((resp:any) => resp.json());
 	}
 }

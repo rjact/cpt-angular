@@ -25,6 +25,7 @@
   z-index: 2;
   background: #ffffff;
   border: solid 1px #000;
+  min-width: 50%;
 }
 .container .cptSection .actions .searchResults li {
   display: flex;
@@ -91,6 +92,10 @@
 .container .cptSection .cptItem .cptActions {
   padding: 14px;
   text-align: right;
+}
+.container .cptSection .cptItem .cptActions .btn.disabled {
+  background: #ddd;
+  cursor: default;
 }
 .container .cptSection input {
   padding: 4px;

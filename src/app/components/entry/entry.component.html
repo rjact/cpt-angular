@@ -19,8 +19,16 @@
 			<div class="byCode">
 				<div class="actionBtn">Enter Code</div>
 				<div class="form">
-					<input type="text" class="form-control" [(ngModel)]="newCode" (keyup)="checkEnter($event, 'code')">
+					<input type="text" class="form-control" [(ngModel)]="newCode" (keyup)="searchCpts()">
 					<div class="btn dark" (click)="addByCptCode()">Add New</div>
+					<div class="searchResults" *ngIf="cptSearchResults">
+						<ul>
+							<li *ngFor="let res of cptSearchResults" (click)="addCpt(res)">
+								<div [innerHTML]="res.CPTCode | highlight: newCode | keepHtml"></div>
+								<div>{{res.MediumDescriptor}}</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="bySearch">
@@ -33,7 +41,7 @@
 					<ul>
 						<li *ngFor="let res of searchResults">
 							<div (click)="addCpt(res)">{{res.CPTCode}}</div>
-							<div [innerHTML]="res.FullDescriptor | highlight: searchTerm | keepHtml"></div>
+							<div [innerHTML]="res.MediumDescriptor | highlight: searchTerm | keepHtml"></div>
 						</li>
 					</ul>
 				</div>
@@ -51,7 +59,7 @@
 					<div class="btn red" (click)="removeCpt(cpt.CPTCode)">Remove</div>
 				</header>
 				<div class="cptInfo">
-					<div class="description">{{cpt.FullDescriptor}} [ {{cpt.AllIcd10Codes.length}} ]</div>
+					<div class="description">{{cpt.MediumDescriptor}}</div>
 				</div>
 				<div class="icd10Container" *ngIf="cpt.ICD10Codes.length > 0">
 					<h3>ICD10 Codes</h3>
@@ -64,7 +72,7 @@
 					</ul>
 				</div>
 				<div class="cptActions">
-					<div class="btn addIcd10" (click)="getIcd10s(cpt)">Add New ICD10</div>
+					<div class="btn addIcd10" [ngClass]="{disabled: cpt.AllIcd10Codes.length == 0}" (click)="getIcd10s(cpt)">Add New ICD10</div>
 				</div>
 			</li>
 		</ul>
