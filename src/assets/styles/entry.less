@@ -26,18 +26,79 @@
 		margin:0 20px;
 
 		.actions {
+			display: flex;
+			padding-bottom: 38px;
+			.actionBtn {
+				width:60px;
+				height:60px;
+				background: @blue;
+				line-height: 60px;
+				text-align: center;
+				font-size:30px;
+				color:@dark;
+				border-radius: 4px;
+				margin:10px;
+				box-shadow: @disabledBtn 3px 3px 3px;
+				text-shadow: @disabledBtn 1px 1px;
+
+				&.active {
+					box-shadow: inset #999 3px 3px 1px;
+				}
+				span {
+					display: none;
+				}
+
+			}
+			.byCode {
+				.actionBtn {
+					&:before {
+						font-family: 'FontAwesome';
+						content: '\f121';
+					}
+				}
+			}
+			.bySearch {
+				.actionBtn {
+					&:before {
+						font-family: 'FontAwesome';
+						content: '\f002';
+					}
+				}
+			}
+			.bySequence {
+				.actionBtn {
+					&:before {
+						font-family: 'FontAwesome';
+						content: '\f022';
+					}
+				}
+			}
+
+			.form {
+				position: absolute;
+				max-height: 0px;
+				overflow: hidden;
+				transition: all 250ms ease-in-out;
+			}
+			.action.active {
+				.form {
+					max-height: 40px;
+				}
+			}
 			.searchResults {
 				position: absolute;
 				z-index: 2;
 				background:#ffffff;
 				border:solid 1px #000;
-				min-width: 50%;;
+				min-width: 50%;
+				margin-top:37px;
 
 				li {
 					display: flex;
 
 					div {
 						padding:8px;
+						cursor: pointer;
 					}
 					div:nth-child(1) {
 						width:10%;
@@ -89,6 +150,7 @@
 						
 						.icd10code {
 							width:100px;
+							flex-shrink: 0;
 						}
 						.icd10desc {
 							flex-grow:1;

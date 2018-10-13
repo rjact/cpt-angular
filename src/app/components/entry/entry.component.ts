@@ -116,9 +116,15 @@ export class EntryComponent implements OnInit, OnDestroy {
 		this.cptSearchResults = null;
 		this.searchTerm = '';
 		this.newCode = '';
+		[].forEach.call(document.getElementsByClassName('action'), (e) => e.classList.remove('active'));
 		this.closeModal(0);
 	}
 	viewSequences() {
 		this.showSequences = true;
+	}
+
+	showForm(evt) {
+		[].forEach.call(document.getElementsByClassName('action'), (e) => e.classList.remove('active'));
+		evt.target.parentElement.classList.add('active');
 	}
 }

@@ -20,18 +20,64 @@
 .container .cptSection {
   margin: 0 20px;
 }
+.container .cptSection .actions {
+  display: flex;
+  padding-bottom: 38px;
+}
+.container .cptSection .actions .actionBtn {
+  width: 60px;
+  height: 60px;
+  background: #65a0cd;
+  line-height: 60px;
+  text-align: center;
+  font-size: 30px;
+  color: #4d4d4d;
+  border-radius: 4px;
+  margin: 10px;
+  box-shadow: #ddd 3px 3px 3px;
+  text-shadow: #ddd 1px 1px;
+}
+.container .cptSection .actions .actionBtn.active {
+  box-shadow: inset #999 3px 3px 1px;
+}
+.container .cptSection .actions .actionBtn span {
+  display: none;
+}
+.container .cptSection .actions .byCode .actionBtn:before {
+  font-family: 'FontAwesome';
+  content: '\f121';
+}
+.container .cptSection .actions .bySearch .actionBtn:before {
+  font-family: 'FontAwesome';
+  content: '\f002';
+}
+.container .cptSection .actions .bySequence .actionBtn:before {
+  font-family: 'FontAwesome';
+  content: '\f022';
+}
+.container .cptSection .actions .form {
+  position: absolute;
+  max-height: 0px;
+  overflow: hidden;
+  transition: all 250ms ease-in-out;
+}
+.container .cptSection .actions .action.active .form {
+  max-height: 40px;
+}
 .container .cptSection .actions .searchResults {
   position: absolute;
   z-index: 2;
   background: #ffffff;
   border: solid 1px #000;
   min-width: 50%;
+  margin-top: 37px;
 }
 .container .cptSection .actions .searchResults li {
   display: flex;
 }
 .container .cptSection .actions .searchResults li div {
   padding: 8px;
+  cursor: pointer;
 }
 .container .cptSection .actions .searchResults li div:nth-child(1) {
   width: 10%;
@@ -81,6 +127,7 @@
 }
 .container .cptSection .cptItem .icd10Container ul.icd10s li .icd10code {
   width: 100px;
+  flex-shrink: 0;
 }
 .container .cptSection .cptItem .icd10Container ul.icd10s li .icd10desc {
   flex-grow: 1;

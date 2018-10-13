@@ -21,7 +21,8 @@
       "prefix": "app",
       "styles": [
 		"assets/styles/reset.css",
-		"assets/styles/main.css"
+		"assets/styles/main.css",
+		"../node_modules/font-awesome/css/font-awesome.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
