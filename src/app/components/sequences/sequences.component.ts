@@ -14,7 +14,7 @@ import { Sequence } from '../../models/Sequence';
   	]
 })
 export class SequencesComponent implements OnInit {
-	private loading:boolean = true;
+	public loading:boolean = true;
 	private title:string = "Sequences";
 	private sequences:Array<Sequence>;
 	private cpts:Array<CptCode>;

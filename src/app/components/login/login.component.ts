@@ -11,8 +11,8 @@ import { Router } from '../../../../node_modules/@angular/router';
 })
 export class LoginComponent {
 
-	private username:string;
-	private password: string;
+	public username:string;
+	public password: string;
 	constructor(private dataService: DataService, private sessionService: SessionService, private router: Router){}
 
 	doLogin() {

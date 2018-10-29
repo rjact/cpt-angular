@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EntryComponent } from './components/entry/entry.component';
@@ -16,6 +15,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SearchService } from './services/search.service';
 import { HighlightTermPipe } from './pipes/highlight-term.pipe';
 import { KeepHtmlPipe } from './pipes/keep-html.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,10 +31,10 @@ import { KeepHtmlPipe } from './pipes/keep-html.pipe';
   imports: [
 	  BrowserModule, 
 	  BrowserAnimationsModule, 
-	  DropDownsModule,
 	  AppRoutingModule,
 	  FormsModule,
-	  HttpModule
+	  HttpModule,
+	  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 	],
   providers: [DataService, AuthGuard, SessionService, SearchService],
   bootstrap: [AppComponent]

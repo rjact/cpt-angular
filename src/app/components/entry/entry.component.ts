@@ -18,14 +18,14 @@ import { ISubscription } from 'rxjs/Subscription';
 export class EntryComponent implements OnInit, OnDestroy {
 	public entry: Entry;
 	public newCode:string;
-	private searchTerm:string;
-	private searchResults:Array<CptCode>;
-	private cptSearchResults: Array<CptCode>;
+	public searchTerm:string;
+	public searchResults:Array<CptCode>;
+	public cptSearchResults: Array<CptCode>;
 	private allCpts:Array<CptCode>;
 
 	private activeCpt:CptCode;
-	private showIcd10List:boolean = false;
-	private showSequences:boolean = false;
+	public showIcd10List:boolean = false;
+	public showSequences:boolean = false;
 
 	private searchSubscription:ISubscription;
 	private getAllCptsSubscription:ISubscription;

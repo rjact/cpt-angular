@@ -11,7 +11,7 @@ import { ISubscription } from 'rxjs/Subscription';
 export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 	@Input() private icd10codes:Array<Icd10Code>;
 	private getIcd10Subscription:ISubscription;
-	private loading:boolean = true;
+	public loading:boolean = true;
 	//@Input() cpt:string;
 	@Output() onAddIcd10:EventEmitter<Icd10Code> = new EventEmitter<Icd10Code>();
 	@Output() onClose:EventEmitter<number> = new EventEmitter<number>();
