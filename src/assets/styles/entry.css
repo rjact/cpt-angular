@@ -17,6 +17,36 @@
   padding: 4px;
   width: 350px;
 }
+.container .patientInfo .searchResults li {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+.container .patientInfo .searchResults li div.name {
+  width: 40%;
+}
+.container .patientInfo .searchResults li div.dob {
+  width: 30%;
+}
+.container .patientInfo .searchResults li div.ehr {
+  width: 20%;
+}
+.container .patientInfo .procedures li {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.container .patientInfo .procedures li .description {
+  width: 100%;
+  font-style: italic;
+  color: #7b7b7b;
+  font-size: 0.8em;
+}
+.container .patientInfo .procedures li::nth-child(odd) {
+  background: #fff;
+}
 .container .cptSection {
   margin: 0 20px;
 }

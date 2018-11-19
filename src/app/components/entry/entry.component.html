@@ -3,16 +3,47 @@
 		<h2>Patient Information</h2>
 		<dl>
 			<dt><label for="patientFirstName">Patient First Name</label></dt>
-			<dd><input type="text" [(ngModel)]="entry.FirstName" class="form-control" /></dd>
+			<dd><input type="text" [(ngModel)]="entry.Patient.PatientFirstName" class="form-control" (keyup)="searchPatient()" /></dd>
 			<dt><label for="patientLastName">Patient Last Name</label></dt>
-			<dd><input type="text" [(ngModel)]="entry.LastName" class="form-control" /></dd>
+			<dd><input type="text" [(ngModel)]="entry.Patient.PatientLastName" class="form-control" (keyup)="searchPatient()" /></dd>
 			<dt><label for="dob">Date of Birth</label></dt>
-			<dd><input type="date" [(ngModel)]="entry.Dob"class="form-control" /></dd>
-			<dt><label for="procedureDate">Date of Procedure</label></dt>
-			<dd><input type="date" [(ngModel)]="entry.ProcedureDate" class="form-control" /></dd>
+			<dd><input type="date" [(ngModel)]="entry.Patient.DOB"class="form-control" /></dd>
+			<dt><label for="gender">Gender</label></dt>
+			<dd>
+				<select type="date" [(ngModel)]="entry.Patient.Gender" class="form-control">
+					<option value="M">Male</option>
+					<option value="F">Female</option>
+				</select>
+			</dd>
 			<dt><label for="ehr">EHR #</label></dt>
-			<dd><input type="text" [(ngModel)]="entry.Ehr" class="form-control" /></dd>
+			<dd><input type="text" [(ngModel)]="entry.Patient.EHRNumber" class="form-control" (keyup)="searchPatient()" /></dd>
 		</dl>
+		<div class="searchResults" *ngIf="patientSearchResults">
+			<ul>
+				<li *ngFor="let patient of patientSearchResults" (mousedown)="selectPatient(patient)">
+					<div class="name">
+						<span [innerHTML]="patient.PatientLastName.trim() | highlight: entry.Patient.PatientLastName | keepHtml"></span>,&nbsp;
+						<span [innerHTML]="patient.PatientFirstName.trim() | highlight: entry.Patient.PatientFirstName | keepHtml"></span>
+					</div>
+					<div class="dob">{{patient.DOB | date}}</div>
+					<div class="ehr" [innerHTML]="patient.EHRNumber | highlight: entry.Patient.EHRNumber | keepHtml"></div>
+				</li>
+			</ul>
+		</div>
+		<div class="procedures" *ngIf="patientProcedures">
+			<ul>
+				<li *ngFor="let procedure of patientProcedures">
+					<div class="name">{{procedure.ProcedureName}}</div>
+					<div class="date">{{procedure.ProcedureDate | date}}</div>
+					<div class="description">{{procedure.Description}}</div>
+				</li>
+				<li>
+					<div class="btn" (click)="addProcedure()">
+						Add new Procedure
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 	<div class="cptSection">
 		<div class="actions">

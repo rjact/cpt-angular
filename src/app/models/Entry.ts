@@ -1,14 +1,13 @@
 import { CptCode } from "./CptCode";
+import { Patient } from './Patient';
+import { Procedure } from "./Procedure";
 
 export class Entry {
-	public FirstName: string;
-	public LastName: string;
-	public Dob: Date;
-	public ProcedureDate: Date;
-	public Ehr: string;
-	public CptCodes: Array<CptCode>;
-
+	public Patient:Patient;
+	public Procedure:Procedure
+	
 	constructor() {
-		this.CptCodes = new Array<CptCode>();
+		this.Patient = new Patient();
+		this.Procedure = new Procedure();
 	}
 }

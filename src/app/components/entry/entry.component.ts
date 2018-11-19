@@ -8,6 +8,8 @@ import { SearchService } from '../../services/search.service';
 import { HighlightTermPipe } from '../../pipes/highlight-term.pipe';
 import { KeepHtmlPipe } from '../../pipes/keep-html.pipe';
 import { ISubscription } from 'rxjs/Subscription';
+import { Patient } from '../../models/Patient';
+import { Procedure } from '../../models/Procedure';
 
 @Component({
   templateUrl: './entry.component.html',
@@ -16,11 +18,13 @@ import { ISubscription } from 'rxjs/Subscription';
   ]
 })
 export class EntryComponent implements OnInit, OnDestroy {
-	public entry: Entry;
+	public entry: Entry = new Entry();
 	public newCode:string;
 	public searchTerm:string;
 	public searchResults:Array<CptCode>;
 	public cptSearchResults: Array<CptCode>;
+	public patientSearchResults:Array<Patient>;
+	public patientProcedures: Array<Procedure>;
 	private allCpts:Array<CptCode>;
 
 	private activeCpt:CptCode;
@@ -29,6 +33,8 @@ export class EntryComponent implements OnInit, OnDestroy {
 
 	private searchSubscription:ISubscription;
 	private getAllCptsSubscription:ISubscription;
+	private patientSearchSubscription:ISubscription;
+	private patientProceduresSubscription:ISubscription;
 
 	constructor(private dataService: DataService, private searchService:SearchService){}
     
@@ -43,6 +49,8 @@ export class EntryComponent implements OnInit, OnDestroy {
 	ngOnDestroy():void {
 		if(this.getAllCptsSubscription) { this.getAllCptsSubscription.unsubscribe(); }
 		if(this.searchSubscription) { this.searchSubscription.unsubscribe(); }
+		if(this.patientSearchSubscription) { this.patientSearchSubscription.unsubscribe(); }
+		if(this.patientProceduresSubscription) { this.patientProceduresSubscription.unsubscribe(); }
 	}
 	
 	addByCptCode(): void {
@@ -50,9 +58,9 @@ export class EntryComponent implements OnInit, OnDestroy {
 			this.dataService.getCptCode(this.newCode).subscribe(cpt => {
 				if(cpt.length > 0) {
 					let newCpt = new CptCode(cpt[0]);
-					this.entry.CptCodes.push(new CptCode(cpt[0]));
+					this.entry.Procedure.CptCodes.push(new CptCode(cpt[0]));
 					let icdSubscription = this.dataService.getIcd10Codes(cpt[0].CPTCode).subscribe(icd => {
-						this.entry.CptCodes.filter(o => o.CPTCode == newCpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
+						this.entry.Procedure.CptCodes.filter(o => o.CPTCode == newCpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
 						icdSubscription.unsubscribe();
 					})
 				}
@@ -75,15 +83,31 @@ export class EntryComponent implements OnInit, OnDestroy {
 			this.cptSearchResults = this.allCpts.filter(c => c.CPTCode.startsWith(this.newCode))
 		}
 	}
+	searchPatient():void {
+		this.patientProcedures = null;
+		let p = this.entry.Patient;
+		if(p.PatientFirstName.length > 2 || p.PatientLastName.length > 2 || p.EHRNumber.length > 2) {
+			this.patientSearchSubscription = this.dataService.searchPatient(p.PatientFirstName, p.PatientLastName, p.EHRNumber).subscribe(res => {
+				this.patientSearchResults = res.map(o => new Patient(o));
+			})
+		}
+	}
+	selectPatient(patient) {
+		this.entry.Patient = patient;
+		this.patientSearchResults = null;
+		this.patientProceduresSubscription = this.dataService.getPatientProcedures(patient.PatientID).subscribe(resp => {
+			this.patientProcedures = resp.map(o => new Procedure(o));
+		})
+	}
 	getIcd10s(cpt) {
 		this.activeCpt = cpt;
 		this.showIcd10List = true;
 	}
 	removeCpt(cpt:string) {
-		this.entry.CptCodes = this.entry.CptCodes.filter(c => c.CPTCode != cpt);
+		this.entry.Procedure.CptCodes = this.entry.Procedure.CptCodes.filter(c => c.CPTCode != cpt);
 	}
 	addIcd10(icd10) {
-		const currCpt = this.entry.CptCodes.filter(c => c.CPTCode == this.activeCpt.CPTCode);
+		const currCpt = this.entry.Procedure.CptCodes.filter(c => c.CPTCode == this.activeCpt.CPTCode);
 		currCpt[0].ICD10Codes.push(icd10);
 	}
 	removeIcd10(cpt:CptCode, code:string) {
@@ -107,9 +131,9 @@ export class EntryComponent implements OnInit, OnDestroy {
 		}
 	}
 	addCpt(cpt) {
-		this.entry.CptCodes.push(new CptCode(cpt));
+		this.entry.Procedure.CptCodes.push(new CptCode(cpt));
 		let icdSubscription = this.dataService.getIcd10Codes(cpt.CPTCode).subscribe(icd => {
-			this.entry.CptCodes.filter(o => o.CPTCode == cpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
+			this.entry.Procedure.CptCodes.filter(o => o.CPTCode == cpt.CPTCode).forEach(o => o.AllIcd10Codes = icd)
 			icdSubscription.unsubscribe();
 		})
 		this.searchResults = null;

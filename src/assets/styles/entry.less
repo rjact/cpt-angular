@@ -21,6 +21,44 @@
 				}
 			}
 		}
+		.searchResults {
+			li {
+				cursor: pointer;
+				display: flex;
+				justify-content: space-between;
+
+				div.name {
+					width:40%
+				}
+				div.dob {
+					width:30%
+				}
+				div.ehr {
+					width:20%;
+				}
+				
+			}
+		}
+		.procedures {
+			li {
+				cursor: pointer;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				padding:10px 0;
+				
+				.description {
+					width:100%;
+					font-style: italic;
+					color:#7b7b7b;
+					font-size:0.8em;
+				}
+
+				&::nth-child(odd) {
+					background: #fff;
+				}
+			}
+		}
 	}
 	.cptSection {
 		margin:0 20px;

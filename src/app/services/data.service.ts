@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CptCode } from '../models/CptCode';
+import { Patient } from '../models/Patient';
 
 @Injectable()
 export class DataService {
 	constructor(private http:Http) {}
 	
-	private API_ROOT = 'https://sandiasoft-server.azurewebsites.net/Home/';
-	//private API_ROOT = 'http://localhost:53614/Home/';
+	//private API_ROOT = 'https://sandiasoft-server.azurewebsites.net/Home/';
+	private API_ROOT = 'http://localhost:53614/Home/';
     
     private getHeaders():any {
         let headers = new Headers();  
@@ -49,5 +50,13 @@ export class DataService {
 	searchCpt(searchTerm:string):Observable<Array<CptCode>> {
 		return this.http.get(`${this.API_ROOT}searchDescription?term=${searchTerm}`)
 			.map((resp:any) => resp.json());
+	}
+	searchPatient(firstName:string, lastName:string, ehrNumber:string) {
+		return this.http.get(`${this.API_ROOT}searchpatient?FirstName=${firstName}&LastName=${lastName}&EHRNumber=${ehrNumber}`)
+			.map((resp:any) => resp.json());
+	}
+	getPatientProcedures(patientId: number) {
+		return this.http.get(`${this.API_ROOT}getPatientProcedures?PatientId=${patientId}`)
+			.map((resp:any) => resp.json());		
 	}
 }
