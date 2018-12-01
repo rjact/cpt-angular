@@ -50,6 +50,18 @@
 .container .cptSection {
   margin: 0 20px;
 }
+.container .cptSection .procedureInfo {
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.container .cptSection .procedureInfo .procedureName {
+  font-weight: bold;
+}
+.container .cptSection .procedureInfo .procedureDate {
+  font-style: italic;
+  font-size: 0.8em;
+}
 .container .cptSection .actions {
   display: flex;
   padding-bottom: 38px;

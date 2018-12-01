@@ -17,6 +17,7 @@ import { HighlightTermPipe } from './pipes/highlight-term.pipe';
 import { KeepHtmlPipe } from './pipes/keep-html.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NewProcedureComponent } from './components/entry/modals/new-procedure.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +27,18 @@ import { environment } from '../environments/environment';
 	Icd10Component,
 	SequencesComponent,
 	HighlightTermPipe,
-	KeepHtmlPipe
+	KeepHtmlPipe,
+	NewProcedureComponent,
   ],
   imports: [
-	  BrowserModule, 
-	  BrowserAnimationsModule, 
-	  AppRoutingModule,
-	  FormsModule,
-	  HttpModule,
-	  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+		BrowserModule, 
+		BrowserAnimationsModule, 
+		AppRoutingModule,
+		FormsModule,
+		HttpModule,
+
+
+		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 	],
   providers: [DataService, AuthGuard, SessionService, SearchService],
   bootstrap: [AppComponent]

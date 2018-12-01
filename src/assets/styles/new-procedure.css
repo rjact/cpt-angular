@@ -1,0 +1,12 @@
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+}
+.fieldWrapper label {
+  margin-bottom: 4px;
+}
+.fieldWrapper input,
+.fieldWrapper textarea {
+  padding: 6px;
+}

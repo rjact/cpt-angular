@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { CptCode } from '../models/CptCode';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class SearchService {

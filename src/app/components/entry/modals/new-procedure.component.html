@@ -1,0 +1,19 @@
+<div class="popup auto">
+	<div class="popupContents">
+		<div class="titlebar">
+			<span>{{title}}</span>
+			<div class="btn red" (click)="close()">Close</div>
+		</div>
+		<main>
+			<div class="fieldWrapper">
+				<label for="procedureName">Procedure Name</label>
+				<input type="text" id="procedureName" [(ngModel)]="procedureName" required />
+			</div>
+			<div class="fieldWrapper">
+				<label for="description">Description</label>
+				<textarea id="description" [(ngModel)]="description" required></textarea>
+			</div>
+			<div class="btn" (click)="saveProcedure()">Save</div>
+		</main>
+	</div>
+</div>

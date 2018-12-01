@@ -30,6 +30,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	private activeCpt:CptCode;
 	public showIcd10List:boolean = false;
 	public showSequences:boolean = false;
+	public showNewProcedure:boolean = false;
 
 	private searchSubscription:ISubscription;
 	private getAllCptsSubscription:ISubscription;
@@ -99,6 +100,10 @@ export class EntryComponent implements OnInit, OnDestroy {
 			this.patientProcedures = resp.map(o => new Procedure(o));
 		})
 	}
+	selectProcedure(procedure) {
+		this.entry.Procedure = procedure;
+		this.patientProcedures = null;
+	}
 	getIcd10s(cpt) {
 		this.activeCpt = cpt;
 		this.showIcd10List = true;
@@ -116,6 +121,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	closeModal(val:number) {
 		this.showIcd10List = false;
 		this.showSequences = false;
+		this.showNewProcedure = false;
 	}
 	checkEnter(event, type) {
 		if(event.keyCode == 13) {
@@ -143,6 +149,10 @@ export class EntryComponent implements OnInit, OnDestroy {
 		[].forEach.call(document.getElementsByClassName('action'), (e) => e.classList.remove('active'));
 		this.closeModal(0);
 	}
+	addProcedure(procedure) {
+		this.entry.Procedure = procedure;
+		this.closeModal(0);
+	}
 	viewSequences() {
 		this.showSequences = true;
 	}
@@ -150,5 +160,12 @@ export class EntryComponent implements OnInit, OnDestroy {
 	showForm(evt) {
 		[].forEach.call(document.getElementsByClassName('action'), (e) => e.classList.remove('active'));
 		evt.target.parentElement.classList.add('active');
+	}
+	showNewProcedureForm() {
+		this.showNewProcedure = true;
+	}
+
+	save() {
+		console.log(this.entry);
 	}
 }

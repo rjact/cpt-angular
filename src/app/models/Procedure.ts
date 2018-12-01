@@ -10,7 +10,8 @@ export class Procedure {
 
 	constructor(o?:any) {
 		if(o) {
-			o.ProcedureDate = new Date(parseInt(o.ProcedureDate.substr(6)));
+			if(isNaN(o.ProcedureDate)) { o.ProcedureDate = o.ProcedureDate.substr(6); }
+			o.ProcedureDate = new Date(parseInt(o.ProcedureDate));
 			o.ProcedureName = o.ProcedureName.trim();
 			o.Description = o.Description.trim();
 		}

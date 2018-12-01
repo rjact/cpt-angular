@@ -32,13 +32,13 @@
 		</div>
 		<div class="procedures" *ngIf="patientProcedures">
 			<ul>
-				<li *ngFor="let procedure of patientProcedures">
+				<li *ngFor="let procedure of patientProcedures" (mousedown)="selectProcedure(procedure)">
 					<div class="name">{{procedure.ProcedureName}}</div>
 					<div class="date">{{procedure.ProcedureDate | date}}</div>
 					<div class="description">{{procedure.Description}}</div>
 				</li>
 				<li>
-					<div class="btn" (click)="addProcedure()">
+					<div class="btn" (click)="showNewProcedureForm()">
 						Add new Procedure
 					</div>
 				</li>
@@ -46,6 +46,10 @@
 		</div>
 	</div>
 	<div class="cptSection">
+		<div class="procedureInfo" *ngIf="entry.Procedure">
+			<div class="procedureName">{{entry.Procedure.ProcedureName}}</div>
+			<div class="procedureDate">{{entry.Procedure.ProcedureDate | date}}</div>
+		</div>
 		<div class="actions">
 			<div class="action byCode">
 				<div class="actionBtn" (mousedown)="$event.target.classList.add('active')" (mouseup)="$event.target.classList.remove('active')" (click)="showForm($event)"><span>Enter Code</span></div>
@@ -84,7 +88,7 @@
 		</div>
 		<h2>CPT Codes</h2>
 		<ul id="cptCodeList">
-			<li *ngFor="let cpt of entry.CptCodes" class="cptItem">
+			<li *ngFor="let cpt of entry.Procedure.CptCodes" class="cptItem">
 				<header>
 					<div class="code">{{cpt.CPTCode}}</div>
 					<div class="btn red" (click)="removeCpt(cpt.CPTCode)">Remove</div>
@@ -107,7 +111,9 @@
 				</div>
 			</li>
 		</ul>
+		<div class="btn" (click)="save()">Save</div>
 	</div>
 
 	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
 	<sequences *ngIf="showSequences" (onAddCpt)="addCpt($event)" (onClose)="closeModal($event)"></sequences>
+	<new-procedure *ngIf="showNewProcedure" (onClose)=closeModal($event) (onAddProcedure)="addProcedure($event)" [title]="'Add New Procedure'"></new-procedure>
