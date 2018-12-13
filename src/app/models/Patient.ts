@@ -1,6 +1,7 @@
 import { isDate } from "util";
 
 export class Patient {
+	public PatientID:number;
 	public PatientFirstName:string = '';
 	public PatientLastName:string = '';
 	public Gender:string;

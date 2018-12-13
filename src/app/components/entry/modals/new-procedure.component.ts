@@ -14,6 +14,7 @@ export class NewProcedureComponent implements OnChanges {
 	@Output() onAddProcedure: EventEmitter<Procedure> = new EventEmitter<Procedure>();
 	@Output() onClose:EventEmitter<number> = new EventEmitter<number>();
 	@Input() title:string;
+	@Input() patientId:number;
 
 	public procedureName:string;
 	public description:string;
@@ -23,7 +24,7 @@ export class NewProcedureComponent implements OnChanges {
 	saveProcedure() {
 		if(this.validate()) {
 			let user:User = this.sessionService.getUser();
-			let procedure = new Procedure({ProcedureName: this.procedureName, Description: this.description, ProcedureDate: Date.now(), UserID: user.UID});
+			let procedure = new Procedure({ProcedureName: this.procedureName, PatientID: this.patientId, Description: this.description, ProcedureDate: Date.now(), UserID: user.UID});
 			this.onAddProcedure.emit(procedure);
 		}
 	}
@@ -43,6 +44,9 @@ export class NewProcedureComponent implements OnChanges {
 	ngOnChanges(changes:SimpleChanges) {
 		if(changes['title']) {
 			this.title = changes['title'].currentValue;
+		}
+		if(changes['patientId']) {
+			this.patientId = changes['patientId'].currentValue;
 		}
 	}
 

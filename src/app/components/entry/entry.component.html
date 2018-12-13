@@ -116,4 +116,4 @@
 
 	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
 	<sequences *ngIf="showSequences" (onAddCpt)="addCpt($event)" (onClose)="closeModal($event)"></sequences>
-	<new-procedure *ngIf="showNewProcedure" (onClose)=closeModal($event) (onAddProcedure)="addProcedure($event)" [title]="'Add New Procedure'"></new-procedure>
+	<new-procedure *ngIf="showNewProcedure" (onClose)=closeModal($event) (onAddProcedure)="addProcedure($event)" [patientId]="entry.Patient.PatientID" [title]="'Add New Procedure'"></new-procedure>
