@@ -16,7 +16,10 @@ export class LoginComponent {
 	constructor(private dataService: DataService, private sessionService: SessionService, private router: Router){}
 
 	doLogin() {
-		this.sessionService.saveUser(this.username);
-		this.router.navigate(['/']);
+		this.dataService.login(this.username, this.password).subscribe(resp => {
+			this.sessionService.saveUser(resp);
+			this.router.navigate(['/']);
+		})
+		
 	}
 }

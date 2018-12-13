@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Procedure } from '../../../models/Procedure';
+import { User } from 'src/app/models/User';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
 	selector: 'new-procedure',
@@ -16,11 +18,12 @@ export class NewProcedureComponent implements OnChanges {
 	public procedureName:string;
 	public description:string;
 
-	constructor() {}
+	constructor(private sessionService:SessionService) {}
 
 	saveProcedure() {
 		if(this.validate()) {
-			let procedure = new Procedure({ProcedureName: this.procedureName, Description: this.description, ProcedureDate: Date.now()});
+			let user:User = this.sessionService.getUser();
+			let procedure = new Procedure({ProcedureName: this.procedureName, Description: this.description, ProcedureDate: Date.now(), UserID: user.UID});
 			this.onAddProcedure.emit(procedure);
 		}
 	}

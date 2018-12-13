@@ -5,14 +5,16 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CptCode } from '../models/CptCode';
 import { Patient } from '../models/Patient';
+import { Entry } from '../models/Entry';
 
 @Injectable()
 export class DataService {
 	constructor(private http:Http) {}
 	
 	//private API_ROOT = 'https://sandiasoft-server.azurewebsites.net/Home/';
-	private API_ROOT = 'http://localhost:53614/Home/';
-    
+	//private API_ROOT = 'http://localhost:53614/Home/';
+	private API_ROOT = '/Home/';
+	    
     private getHeaders():any {
         let headers = new Headers();  
 		headers.append('Content-Type', 'application/json');
@@ -20,6 +22,10 @@ export class DataService {
 		return {headers: headers};
 	}
 
+	login(username:string, password:string) {
+		return this.http.post(`${this.API_ROOT}login`, {username: username, password: password}, this.getHeaders())
+			.map((resp:any) => resp.json());
+	}
 	getAllCpts() {
 		return this.http.get(`${this.API_ROOT}getAllCpts`)
 			.map((resp:any) => resp.json());
@@ -58,5 +64,12 @@ export class DataService {
 	getPatientProcedures(patientId: number) {
 		return this.http.get(`${this.API_ROOT}getPatientProcedures?PatientId=${patientId}`)
 			.map((resp:any) => resp.json());		
+	}
+
+	saveEntry(entry:Entry) {
+		var headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+		return this.http.post(`${this.API_ROOT}saveEntry`, {patient: entry.Patient, procedure: entry.Procedure}, this.getHeaders())
+			.map((resp:any) => resp.json());
 	}
 }

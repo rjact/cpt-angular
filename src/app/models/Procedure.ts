@@ -7,6 +7,7 @@ export class Procedure {
 	public ProcedureName: string;
 	public Description: string;
 	public CptCodes: Array<CptCode>;
+	public ProcedureCodes:any;
 
 	constructor(o?:any) {
 		if(o) {

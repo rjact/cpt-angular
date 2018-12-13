@@ -1,0 +1,8 @@
+{
+    "/Home/*": {
+    "target": "http://localhost:53614",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+    }
+}

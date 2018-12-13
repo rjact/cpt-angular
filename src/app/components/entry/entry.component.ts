@@ -166,6 +166,15 @@ export class EntryComponent implements OnInit, OnDestroy {
 	}
 
 	save() {
-		console.log(this.entry);
+		let submission:any = {};
+		submission.Patient = this.entry.Patient;
+		let {CptCodes, ...proc} = this.entry.Procedure;
+
+		proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CPTCode: c.CPTCode, ICD10_Code: i.ICD_10CMCode, ProcedureID: proc.ProcedureID }})}).reduce((a,b) => a.concat(b))
+		submission.Procedure = proc;
+		console.log(submission);
+		this.dataService.saveEntry(submission).subscribe(res => {
+			console.log(res);
+		})
 	}
 }

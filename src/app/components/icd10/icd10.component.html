@@ -20,7 +20,7 @@
 					<div class="btn" (click)="addIcd10(icd10)" [ngClass]="{disabled: icd10.isIncluded}">Add</div>
 				</li>
 			</ul>
-			<h2 *ngIf="icd10codes.length == 0">There are no ICD10 codes associated with this CPT Code</h2>
+			<h2 *ngIf="!loading && icd10codes.length == 0">There are no ICD10 codes associated with this CPT Code</h2>
 		</main>
 	</div>
 </div>
