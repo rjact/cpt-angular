@@ -5,5 +5,7 @@ export class Icd10Code {
 	public ICD_10CMFullDescription:string;
 	public isIncluded: boolean = false;
 
-	constructor() {}
+	constructor(o?:any) {
+		Object.assign(this,o);
+	}
 }

@@ -24,7 +24,7 @@ export class NewProcedureComponent implements OnChanges {
 	saveProcedure() {
 		if(this.validate()) {
 			let user:User = this.sessionService.getUser();
-			let procedure = new Procedure({ProcedureName: this.procedureName, PatientID: this.patientId, Description: this.description, ProcedureDate: Date.now(), UserID: user.UID});
+			let procedure = new Procedure({ProcedureName: this.procedureName, PatientID: this.patientId, Description: this.description, ProcedureDate: Date.now(), UserID: user.UID, Editable: true});
 			this.onAddProcedure.emit(procedure);
 		}
 	}

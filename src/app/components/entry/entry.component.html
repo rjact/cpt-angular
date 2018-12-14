@@ -91,7 +91,7 @@
 			<li *ngFor="let cpt of entry.Procedure.CptCodes" class="cptItem">
 				<header>
 					<div class="code">{{cpt.CPTCode}}</div>
-					<div class="btn red" (click)="removeCpt(cpt.CPTCode)">Remove</div>
+					<div class="btn red" (click)="removeCpt(cpt.CPTCode)" *ngIf="entry.Procedure.Editable">Remove</div>
 				</header>
 				<div class="cptInfo">
 					<div class="description">{{cpt.MediumDescriptor}}</div>
@@ -102,16 +102,16 @@
 						<li *ngFor="let icd10 of cpt.ICD10Codes">
 							<div class="icd10code">{{icd10.ICD_10CMCode}}</div>
 							<div class="icd10desc">{{icd10.ICD_10CMFullDescription}}</div>
-							<div class="btn red" (click)="removeIcd10(cpt, icd10.ICD_10CMCode)">Remove</div>
+							<div class="btn red" (click)="removeIcd10(cpt, icd10.ICD_10CMCode)" *ngIf="entry.Procedure.Editable">Remove</div>
 						</li>
 					</ul>
 				</div>
 				<div class="cptActions">
-					<div class="btn addIcd10" [ngClass]="{disabled: cpt.AllIcd10Codes.length == 0}" (click)="getIcd10s(cpt)">Add New ICD10</div>
+					<div class="btn addIcd10" [ngClass]="{disabled: cpt.AllIcd10Codes.length == 0}" (click)="getIcd10s(cpt)" *ngIf="entry.Procedure.Editable">Add New ICD10</div>
 				</div>
 			</li>
 		</ul>
-		<div class="btn" (click)="save()">Save</div>
+		<div class="btn" (click)="save()" *ngIf="entry.Procedure.Editable">Save</div>
 	</div>
 
 	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>
