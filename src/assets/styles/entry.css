@@ -128,6 +128,11 @@
 .container .cptSection .actions .searchResults li:nth-child(odd) {
   background: #f0f0f0;
 }
+.container .cptSection .actions .searchResults li.noResults {
+  padding: 10px;
+  color: #b50101;
+  font-weight: bold;
+}
 .container .cptSection .cptItem {
   border: solid 2px #65a0cd;
   margin: 8px 0;

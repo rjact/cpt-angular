@@ -59,6 +59,7 @@
 				</div>
 				<div class="searchResults" *ngIf="cptSearchResults">
 					<ul>
+							<li class="noResults" *ngIf="cptSearchResults.length == 0">No CPT Codes Found</li>
 						<li *ngFor="let res of cptSearchResults" (click)="addCpt(res)">
 							<div [innerHTML]="res.CPTCode | highlight: newCode | keepHtml"></div>
 							<div>{{res.MediumDescriptor}}</div>
@@ -74,6 +75,7 @@
 				</div>
 				<div class="searchResults" *ngIf="searchResults">
 					<ul>
+						<li class="noResults" *ngIf="searchResults.length == 0">No CPT Codes Found</li>
 						<li *ngFor="let res of searchResults" (click)="addCpt(res)">
 							<div>{{res.CPTCode}}</div>
 							<div [innerHTML]="res.MediumDescriptor | highlight: searchTerm | keepHtml"></div>

@@ -79,7 +79,10 @@ export class EntryComponent implements OnInit, OnDestroy {
 		})
 	}
 	searchCpts():void {
-		if(this.newCode.length < 2) { return; }
+		if(this.newCode.length < 2) { 
+			this.cptSearchResults = null;
+			return; 
+		}
 		if(this.allCpts) {
 			this.cptSearchResults = this.allCpts.filter(c => c.CPTCode.startsWith(this.newCode))
 		}
@@ -102,7 +105,13 @@ export class EntryComponent implements OnInit, OnDestroy {
 	}
 	selectProcedure(procedure) {
 		this.entry.Procedure = procedure;
-		this.patientProcedures = null;
+		this.entry.Procedure.CptCodes.forEach(c => {
+			if(c.AllIcd10Codes.length == 0) {
+				this.dataService.getIcd10Codes(c.CPTCode).subscribe(res => {
+					c.AllIcd10Codes = res;
+				})
+			}
+		})
 	}
 	getIcd10s(cpt) {
 		this.activeCpt = cpt;
@@ -170,7 +179,8 @@ export class EntryComponent implements OnInit, OnDestroy {
 		submission.Patient = this.entry.Patient;
 		let {CptCodes, ...proc} = this.entry.Procedure;
 
-		proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CPTCode: c.CPTCode, ICD10_Code: i.ICD_10CMCode, ProcedureID: proc.ProcedureID }})}).reduce((a,b) => a.concat(b))
+		//proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CPTCode: c.CPTCode, ICD10_Code: i.ICD_10CMCode, ProcedureID: proc.ProcedureID }})}).reduce((a,b) => a.concat(b))
+		proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CrosswalkID: i.CrosswalkID, ProcedureID: proc.ProcedureID }})}).reduce((a,b) => a.concat(b));
 		submission.Procedure = proc;
 		console.log(submission);
 		this.dataService.saveEntry(submission).subscribe(res => {
