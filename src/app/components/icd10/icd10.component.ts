@@ -44,7 +44,7 @@ export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 		if(this.getIcd10Subscription) { this.getIcd10Subscription.unsubscribe(); }
 	}
 	ngOnChanges(changes:SimpleChanges) {
-		if(changes.icd10codes) {
+		if(changes.icd10codes && changes.icd10codes.currentValue) {
 			this.icd10codes = changes.icd10codes.currentValue;
 			this.loading = false;
 		}

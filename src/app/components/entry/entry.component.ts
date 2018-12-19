@@ -105,7 +105,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	selectProcedure(procedure) {
 		this.entry.Procedure = procedure;
 		this.entry.Procedure.CptCodes.forEach(c => {
-			if(c.AllIcd10Codes.length == 0) {
+			if(!c.AllIcd10Codes) {
 				this.dataService.getIcd10Codes(c.CPTCode).subscribe(res => {
 					c.AllIcd10Codes = res;
 					c.AllIcd10Codes.forEach(i => {
