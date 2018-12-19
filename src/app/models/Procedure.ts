@@ -35,7 +35,7 @@ export class Procedure {
 				arr.push(new CptCode({CPTCode: e.CPTCode, MediumDescriptor: e.MediumDescriptor, ICD10Codes: new Array<Icd10Code>() }));
 				idx = arr.length - 1;
 			}
-			arr[idx].ICD10Codes.push(new Icd10Code({CptCode: e.CPTCode, ICD_10CMCode: e.ICD_10CMCode, ICD_10CMFullDescription: e.ICD_10CMFullDescription, isIncluded: true }))
+			arr[idx].ICD10Codes.push(new Icd10Code({CptCode: e.CPTCode, ICD_10CMCode: e.ICD_10CMCode, ICD_10CMFullDescription: e.ICD_10CMFullDescription, isIncluded: true, CrosswalkID: e.CrosswalkID }))
 		})
 
 		return arr;
