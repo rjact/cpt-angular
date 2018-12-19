@@ -41,7 +41,6 @@ export class EntryComponent implements OnInit, OnDestroy {
     
     ngOnInit():void {
 		this.entry = new Entry();
-		this.showSequences = true;
 		this.getAllCptsSubscription = this.dataService.getAllCpts().subscribe(res => {
 			this.allCpts = res;
 		})
@@ -109,6 +108,11 @@ export class EntryComponent implements OnInit, OnDestroy {
 			if(c.AllIcd10Codes.length == 0) {
 				this.dataService.getIcd10Codes(c.CPTCode).subscribe(res => {
 					c.AllIcd10Codes = res;
+					c.AllIcd10Codes.forEach(i => {
+						if(c.ICD10Codes.some(x => x.ICD_10CMCode == i.ICD_10CMCode)) {
+							i.isIncluded = true
+						}
+					})
 				})
 			}
 		})
