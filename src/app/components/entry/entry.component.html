@@ -60,7 +60,7 @@
 				<div class="searchResults" *ngIf="cptSearchResults">
 					<ul>
 							<li class="noResults" *ngIf="cptSearchResults.length == 0">No CPT Codes Found</li>
-						<li *ngFor="let res of cptSearchResults" (click)="addCpt(res)">
+						<li *ngFor="let res of cptSearchResults" (mousedown)="addCpt(res)">
 							<div [innerHTML]="res.CPTCode | highlight: newCode | keepHtml"></div>
 							<div>{{res.MediumDescriptor}}</div>
 						</li>
@@ -113,7 +113,7 @@
 				</div>
 			</li>
 		</ul>
-		<div class="btn" (click)="save()" *ngIf="entry.Procedure.Editable">Save</div>
+		<div class="btn" (click)="save()" *ngIf="entry.Procedure.Editable && entry.Procedure.CptCodes.length > 0">Save</div>
 	</div>
 
 	<icd10codes [icd10codes]="activeCpt.AllIcd10Codes" *ngIf="showIcd10List" (onAddIcd10)="addIcd10($event)" (onClose)="closeModal($event)"></icd10codes>

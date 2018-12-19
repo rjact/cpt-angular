@@ -164,6 +164,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	}
 	addProcedure(procedure) {
 		this.entry.Procedure = procedure;
+		this.patientProcedures.push(procedure);
 		this.closeModal(0);
 	}
 	viewSequences() {
