@@ -3,7 +3,7 @@ import { DataService } from './data.service';
 import { CptCode } from '../models/CptCode';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class SearchService {
@@ -33,7 +33,7 @@ export class SearchService {
 			})[0];
 			const newResults = bestMatch.results.filter(r => searchWords.every(w => r.FullDescriptor.toLowerCase().indexOf(w) > -1));
 			this.searches.push(new PriorCptSearches(searchTerm, newResults));
-			return Observable.of(newResults);
+			return of(newResults);
 		}
 		
 	}
