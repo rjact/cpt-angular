@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Procedure } from '../../../models/Procedure';
-import { User } from 'src/app/models/User';
+import { User } from '../../../models/User';
 import { SessionService } from '../../../services/session.service';
 
 @Component({
