@@ -72,4 +72,14 @@ export class DataService {
 		return this.http.post(`${this.API_ROOT}saveEntry`, {patient: entry.Patient, procedure: entry.Procedure}, this.getHeaders())
 			.map((resp:any) => resp.json());
 	}
+
+	searchICD10s(term:string) {
+		console.warn('Should cache this or get from service worker');
+		return this.http.get(`${this.API_ROOT}searchICD10s?term=${term}`)
+			.map((resp:any) => resp.json());				
+	}
+	validateIcd10(code:string) {
+		return this.http.get(`${this.API_ROOT}validateIcd10?code=${code}`)
+		.map((resp:any) => resp.json()); 
+	}
 }

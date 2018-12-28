@@ -14,5 +14,13 @@ export class SessionService {
 	getUser(): User {
 		return (JSON.parse(window.sessionStorage.getItem("user")) as User) || new User();
 	}
+
+	showError(message:string) {
+		alert(message);
+	}
+
+	showInfo(message:string) {
+		alert(message);
+	}
     
 }

@@ -7,6 +7,7 @@ export class CptCode {
 	public FullDescriptor: string;
 	public AllIcd10Codes: Array<any>;
 	public ICD10Codes: Array<Icd10Code>;
+	public CPTCodeFullDescription:string;
 
 	constructor(o?:any) {
 		/*

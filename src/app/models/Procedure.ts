@@ -32,7 +32,7 @@ export class Procedure {
 		data.forEach(e => {
 			let idx = arr.findIndex(c => c.CPTCode == e.CPTCode);
 			if(idx == -1) {
-				arr.push(new CptCode({CPTCode: e.CPTCode, MediumDescriptor: e.MediumDescriptor, ICD10Codes: new Array<Icd10Code>() }));
+				arr.push(new CptCode({CPTCode: e.CPTCode, MediumDescriptor: e.MediumDescriptor, CPTCodeFullDescription: e.FullDescriptor, ICD10Codes: new Array<Icd10Code>() }));
 				idx = arr.length - 1;
 			}
 			arr[idx].ICD10Codes.push(new Icd10Code({CptCode: e.CPTCode, ICD_10CMCode: e.ICD_10CMCode, ICD_10CMFullDescription: e.ICD_10CMFullDescription, isIncluded: true, CrosswalkID: e.CrosswalkID }))
@@ -49,6 +49,8 @@ export class ProcedureView {
 	public ICD_10CMFullDescription:string;
 	public MediumDescriptor:string;
 	public ProcedureID: number;
+	public CPTCodeFullDescription: string;
+	public FullDescriptor:string;
 
 	constructor(o?:any) {
 		Object.assign(this,o);

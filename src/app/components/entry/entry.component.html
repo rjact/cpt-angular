@@ -109,6 +109,9 @@
 					</ul>
 				</div>
 				<div class="cptActions">
+					<div>
+						<input type="text" [(ngModel)]="searchIcd10" (focus)="setActiveCpt(cpt)"><div class="btn" (click)="addIcd10ByCode()">Add</div>
+					</div>
 					<div class="btn addIcd10" [ngClass]="{disabled: !cpt.AllIcd10Codes}" (click)="getIcd10s(cpt)" *ngIf="entry.Procedure.Editable">Add New ICD10</div>
 				</div>
 			</li>

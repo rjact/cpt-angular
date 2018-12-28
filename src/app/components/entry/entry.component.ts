@@ -10,6 +10,7 @@ import { KeepHtmlPipe } from '../../pipes/keep-html.pipe';
 import { ISubscription } from 'rxjs/Subscription';
 import { Patient } from '../../models/Patient';
 import { Procedure } from '../../models/Procedure';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   templateUrl: './entry.component.html',
@@ -25,6 +26,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	public cptSearchResults: Array<CptCode>;
 	public patientSearchResults:Array<Patient>;
 	public patientProcedures: Array<Procedure>;
+	public searchIcd10:string;
 	private allCpts:Array<CptCode>;
 
 	private activeCpt:CptCode;
@@ -36,8 +38,9 @@ export class EntryComponent implements OnInit, OnDestroy {
 	private getAllCptsSubscription:ISubscription;
 	private patientSearchSubscription:ISubscription;
 	private patientProceduresSubscription:ISubscription;
+	private validateIcd10Subscription:ISubscription;
 
-	constructor(private dataService: DataService, private searchService:SearchService){}
+	constructor(private dataService: DataService, private searchService:SearchService, private sessionService: SessionService){}
     
     ngOnInit():void {
 		this.entry = new Entry();
@@ -51,6 +54,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 		if(this.searchSubscription) { this.searchSubscription.unsubscribe(); }
 		if(this.patientSearchSubscription) { this.patientSearchSubscription.unsubscribe(); }
 		if(this.patientProceduresSubscription) { this.patientProceduresSubscription.unsubscribe(); }
+		if(this.validateIcd10Subscription) { this.validateIcd10Subscription.unsubscribe(); }
 	}
 	
 	addByCptCode(): void {
@@ -121,12 +125,29 @@ export class EntryComponent implements OnInit, OnDestroy {
 		this.activeCpt = cpt;
 		this.showIcd10List = true;
 	}
+	setActiveCpt(cpt) {
+		this.activeCpt = this.entry.Procedure.CptCodes.filter(c => c.CPTCode == cpt.CPTCode)[0];
+	}
 	removeCpt(cpt:string) {
 		this.entry.Procedure.CptCodes = this.entry.Procedure.CptCodes.filter(c => c.CPTCode != cpt);
 	}
 	addIcd10(icd10) {
 		const currCpt = this.entry.Procedure.CptCodes.filter(c => c.CPTCode == this.activeCpt.CPTCode);
 		currCpt[0].ICD10Codes.push(icd10);
+	}
+	addIcd10ByCode() {
+		this.validateIcd10Subscription = this.dataService.validateIcd10(this.searchIcd10).subscribe(resp => {
+			if(resp.success) {
+				if(this.activeCpt.ICD10Codes.filter(c => c.ICD_10CMCode == resp.Icd10.ICD_10CMCode).length == 0) {
+					this.activeCpt.ICD10Codes.push(new Icd10Code({ICD_10CMCode:resp.Icd10.ICD_10CMCode, ICD_10CMFullDescription: resp.Icd10.FullDescription, isIncluded: true, CrosswalkID: 0}));
+				} else {
+					this.sessionService.showError("This ICD10 Code is already attached to this CPT");
+				}
+			} else {
+				this.sessionService.showError("The ICD10 code entered is not valid.")
+			}
+			this.searchIcd10 = '';
+		})
 	}
 	removeIcd10(cpt:CptCode, code:string) {
 		cpt.ICD10Codes = cpt.ICD10Codes.filter(i => i.ICD_10CMCode != code);
@@ -185,11 +206,16 @@ export class EntryComponent implements OnInit, OnDestroy {
 		let {CptCodes, ...proc} = this.entry.Procedure;
 
 		//proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CPTCode: c.CPTCode, ICD10_Code: i.ICD_10CMCode, ProcedureID: proc.ProcedureID }})}).reduce((a,b) => a.concat(b))
-		proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CrosswalkID: i.CrosswalkID, ProcedureID: proc.ProcedureID }})}).reduce((a,b) => a.concat(b));
+		proc.ProcedureCodes = CptCodes.map(c => { return c.ICD10Codes.map(i => { return { CrosswalkID: i.CrosswalkID, ProcedureID: proc.ProcedureID, ICD_10CMCode: i.ICD_10CMCode, ICD_10CMFullDescription: i.ICD_10CMFullDescription, CptCodeFullDescription: c.CPTCodeFullDescription }})}).reduce((a,b) => a.concat(b));
 		submission.Procedure = proc;
 		console.log(submission);
 		this.dataService.saveEntry(submission).subscribe(res => {
 			console.log(res);
+			if(res.success) {
+				this.sessionService.showInfo("Entry Saved");
+			} else {
+				this.sessionService.showError(res.error);
+			}
 		})
 	}
 }

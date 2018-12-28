@@ -10,7 +10,9 @@ import { ISubscription } from 'rxjs/Subscription';
 })
 export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 	@Input() private icd10codes:Array<Icd10Code>;
+	public allICD10s: Array<Icd10Code>;
 	private getIcd10Subscription:ISubscription;
+	private getAllIcd10Subscription:ISubscription;
 	public loading:boolean = true;
 	//@Input() cpt:string;
 	@Output() onAddIcd10:EventEmitter<Icd10Code> = new EventEmitter<Icd10Code>();
@@ -30,13 +32,9 @@ export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 	}
 	
 	ngOnInit() {
+		/*
 		if(!this.icd10codes)
 			this.loading = true;
-		/*
-		this.getIcd10Subscription = this.dataService.getIcd10Codes(this.cpt).subscribe(codes => {
-			this.icd10codes = codes;
-			this.loading = false;
-		})
 		*/
 	}
 
