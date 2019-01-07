@@ -14,13 +14,17 @@
 		</div>
 		<main>
 			<ul>
-				<li *ngFor="let icd10 of icd10codes">
-					<span class="code">{{icd10.ICD_10CMCode}}</span>
-					<span class="description">{{icd10.ICD_10CMFullDescription}}</span>
+				<li>
+					<span class="code"><input [(ngModel)]="codeFilter" (keyup)="filter()" /></span>
+					<span class="description"><input [(ngModel)]="descripFilter" (keyup)="filter()" /></span>
+				</li>
+				<li *ngFor="let icd10 of filteredIcd10Codes">
+					<span class="code" [innerHTML]="icd10.ICD_10CMCode.trim() | highlight: codeFilter | keepHtml"></span>
+					<span class="description" [innerHTML]="icd10.ICD_10CMFullDescription.trim() | highlight: descripFilter | keepHtml"></span>
 					<div class="btn" (click)="addIcd10(icd10)" [ngClass]="{disabled: icd10.isIncluded}">Add</div>
 				</li>
 			</ul>
-			<h2 *ngIf="!loading && icd10codes.length == 0">There are no ICD10 codes associated with this CPT Code</h2>
+			<h2 *ngIf="icd10codes.length == 0">There are no ICD10 codes associated with this CPT Code</h2>
 
 		</main>
 	</div>

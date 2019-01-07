@@ -10,11 +10,12 @@ import { ISubscription } from 'rxjs/Subscription';
 })
 export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 	@Input() private icd10codes:Array<Icd10Code>;
-	public allICD10s: Array<Icd10Code>;
+	public filteredIcd10Codes: Array<Icd10Code>;
+	public codeFilter:string = "";
+	public descripFilter:string = "";
+
 	private getIcd10Subscription:ISubscription;
-	private getAllIcd10Subscription:ISubscription;
 	public loading:boolean = true;
-	//@Input() cpt:string;
 	@Output() onAddIcd10:EventEmitter<Icd10Code> = new EventEmitter<Icd10Code>();
 	@Output() onClose:EventEmitter<number> = new EventEmitter<number>();
 
@@ -31,6 +32,36 @@ export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 		this.onClose.next(0);
 	}
 	
+	filter() {
+		if(this.codeFilter === "" && this.descripFilter === "") {
+			this.filteredIcd10Codes = this.icd10codes;
+		} else {
+			if(this.codeFilter == "") {
+				this.filteredIcd10Codes = this.icd10codes.filter(i => {
+					const words = this.descripFilter.toLowerCase().split(' ');
+					const descrip = i.ICD_10CMFullDescription.toLowerCase();
+					return words.every(w => descrip.indexOf(w) > -1);
+				}) ;
+			} else {
+				if(this.descripFilter == "") {
+					this.filteredIcd10Codes = this.icd10codes.filter(i => {
+						return i.ICD_10CMCode.toLowerCase().indexOf(this.codeFilter.toLowerCase()) > -1
+					});
+				} else {
+					this.filteredIcd10Codes = this.icd10codes.filter(i => {
+						return i.ICD_10CMCode.toLowerCase().indexOf(this.codeFilter.toLowerCase()) > -1 
+							&& i.ICD_10CMFullDescription.toLowerCase().indexOf(this.descripFilter.toLowerCase()) > -1
+					});
+				}
+			}
+			/*
+			this.filteredIcd10Codes = this.icd10codes.filter(i => {
+				return (this.codeFilter == "" || i.ICD_10CMCode.toLowerCase().indexOf(this.codeFilter.toLowerCase()) > -1) 
+					&& (this.descripFilter == "" || i.ICD_10CMFullDescription.toLowerCase().indexOf(this.descripFilter.toLowerCase()) > -1)
+			});
+			*/
+		}
+	}
 	ngOnInit() {
 		/*
 		if(!this.icd10codes)
@@ -44,6 +75,7 @@ export class Icd10Component implements OnInit, OnDestroy, OnChanges {
 	ngOnChanges(changes:SimpleChanges) {
 		if(changes.icd10codes && changes.icd10codes.currentValue) {
 			this.icd10codes = changes.icd10codes.currentValue;
+			this.filteredIcd10Codes = this.icd10codes;
 			this.loading = false;
 		}
 	}

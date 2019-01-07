@@ -10,6 +10,14 @@
   width: 100px;
   flex-shrink: 0;
 }
+.icd10List li span.code input {
+  padding: 5px;
+  width: calc(100% - 20px);;
+}
 .icd10List li span.description {
   flex-grow: 1;
+}
+.icd10List li span.description input {
+  padding: 5px;
+  width: calc(100% - 20px);;
 }

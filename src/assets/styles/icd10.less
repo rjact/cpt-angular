@@ -11,9 +11,18 @@
 			&.code {
 				width:100px;
 				flex-shrink: 0;
+
+				input {
+					padding:5px;
+					width: ~"calc(100% - 20px);"
+				}
 			}
 			&.description {
 				flex-grow: 1;
+				input {
+					padding:5px;
+					width: ~"calc(100% - 20px);"
+				}
 			}
 		}
 	}
